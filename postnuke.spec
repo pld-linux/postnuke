@@ -83,7 +83,7 @@ install index.php	$RPM_BUILD_ROOT%{nukeroot}
 rm -rf $RPM_BUILD_ROOT
 
 %post install
-echo "Remember to uninstall %{name}-install after initiation of postnuke!!"
+echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 
 %files
 %defattr(644,root,root,755)
