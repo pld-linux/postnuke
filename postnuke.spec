@@ -10,6 +10,7 @@ Source0:	http://www.postnuke.com/downloads/pn-%{version}_phoenix.tgz
 Source1:	%{name}-index.php
 Source2:	%{name}-pnAPI.php
 URL:		http://www.postnuke.com/
+Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
 Requires:	webserver
 BuildArch:	noarch
