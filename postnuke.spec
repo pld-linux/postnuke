@@ -55,7 +55,7 @@ Niektóre zalety PostNuke to:
    dziêki zgodno¶ci ze standardem HTML 4.01 transitional
  - standardowe API i obszerna dokumentacja, pozwalaj±ce na ³atwe
    tworzenie dodatkowej funkcjonalno¶ci poprzez modu³y i bloki.
- 
+
 Ten pakiet zawiera dodatkowe modu³y:
 - ContentExpress-%{_ceversion}
 
