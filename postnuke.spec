@@ -1,23 +1,20 @@
 # TODO:
-# - SECURITY: http://securitytracker.com/alerts/2004/Jul/1010755.html
-# - SECURITY: http://securitytracker.com/alerts/2004/Jul/1010733.html
-# - SECURITY: http://securitytracker.com/alerts/2004/Apr/1009801.html
 # - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011203.html
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
-Version:	0.7.2.3
-Release:	3
+Version:	0.7.5.0
+Release:	0.1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Source0:	http://developers.postnuke.com/downloads/pn-7.2.3/%{name}-phoenix-%{version}.tar.gz
-# Source0-md5:	7b4e49d1724c8e28f9fc2afa381d41e5
+Source0:	http://download.hostnuke.com/sf/postnuke/PostNuke-0.750.tar.gz
+# Source0-md5:	237975777086466ced38e55321981274
 # ContentExpress
-%define		_ceversion	1.2.6.0
-Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.zip
-# Source1-md5:	bfc7e8de2a993da273099177e2b9ca3f
+%define		_ceversion	1.2.7.5
+Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
+# Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
 # Polish lang pack
-Source2:	pn-%{version}-pl.tar.gz
+Source2:	pn-0.7.2.3-pl.tar.gz
 # Source2-md5:	dfc1b697125b0e42c65bfff7ff5ddeab
 URL:		http://www.postnuke.com/
 Requires:	php-exif
@@ -78,7 +75,7 @@ Package needed to install postnuke.
 Pakiet potrzebny do zainstalowania postnuke.
 
 %prep
-%setup -q -n %{name}-phoenix-%{version} -a1 -a2
+%setup -q -n PostNuke-0.750 -a1 -a2
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +83,7 @@ install -d $RPM_BUILD_ROOT%{nukeroot}
 
 cp -ar html/		$RPM_BUILD_ROOT%{nukeroot}
 cp -ar html/includes/	$RPM_BUILD_ROOT%{nukeroot}
-cp -ar modules/		$RPM_BUILD_ROOT%{nukeroot}
+cp -ar html/modules/		$RPM_BUILD_ROOT%{nukeroot}
 install html/index.php	$RPM_BUILD_ROOT%{nukeroot}
 
 %clean
@@ -97,7 +94,7 @@ echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog CREDITS.txt INSTALL.txt phoenix-sql/*
+%doc html/docs/ChangeLog.txt html/docs/CREDITS.txt phoenix-sql/*
 %dir %{nukeroot}
 %dir %{nukeroot}/html
 %attr(640,http,http) %config(noreplace) %{nukeroot}/html/config*.php
