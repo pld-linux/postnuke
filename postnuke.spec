@@ -10,10 +10,12 @@ License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://download.hostnuke.com/sf/postnuke/PostNuke-0.750.tar.gz
 # Source0-md5:	237975777086466ced38e55321981274
+# Source0-size:	2432847
 # ContentExpress
 %define		_ceversion	1.2.7.5
 Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
 # Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
+# Source1-size:	988432
 # Polish lang pack
 Source2:	pn-0.7.2.3-pl.tar.gz
 # Source2-md5:	dfc1b697125b0e42c65bfff7ff5ddeab
