@@ -8,8 +8,9 @@ Group:		Applications/Databases/Interfaces
 Source0:	http://developers.postnuke.com/downloads/pn-7.2.3/%{name}-phoenix-%{version}.tar.gz
 # Source0-md5:	7b4e49d1724c8e28f9fc2afa381d41e5
 # ContentExpress
-%define		_ceversion	1.2.4.1
-Source1:	ce-%{_ceversion}.zip
+%define		_ceversion	1.2.6.0
+Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.zip
+# Source1-md5:	bfc7e8de2a993da273099177e2b9ca3f
 # Polish lang pack
 Source2:	pn-%{version}-pl.tar.gz
 # Source2-md5:	dfc1b697125b0e42c65bfff7ff5ddeab
@@ -79,9 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{nukeroot}
 
 cp -ar html/		$RPM_BUILD_ROOT%{nukeroot}
-cp -ar includes/	$RPM_BUILD_ROOT%{nukeroot}
+cp -ar html/includes/	$RPM_BUILD_ROOT%{nukeroot}
 cp -ar modules/		$RPM_BUILD_ROOT%{nukeroot}
-install index.php	$RPM_BUILD_ROOT%{nukeroot}
+install html/index.php	$RPM_BUILD_ROOT%{nukeroot}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
