@@ -13,7 +13,7 @@ Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
 # Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
 # Polish lang pack
 Source2:	pn-0.7.5.0-pl.tar.gz
-# Source2-md5:	424d6be38badb2925fe6c8c5c39f3930
+# Source2-md5:	08e6850526cb8372a1e6b50bc3c1e155
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
