@@ -34,7 +34,6 @@ secure and stable than competing products, and able to work in
 high-volume environments with ease.
 
 Some of the highlights of PostNuke are:
-
 - Customisation of all aspects of the website's appearance through
   themes, including CSS support
 - The ability to specify items as being suitable for either a single
@@ -53,14 +52,14 @@ bezpieczny i stabilny ni¿ konkurencyjne produkty i mo¿e z ³atwo¶ci±
 dzia³aæ w ¶rodowiskach z du¿ym ruchem.
 
 Niektóre zalety PostNuke to:
- - konfigurowalno¶æ wszystkich aspektów wygl±du serwisu WWW poprzez
-   motywy, wraz z obs³ug± CSS
- - mo¿liwo¶æ okre¶lenia elementów jako odpowiednich dla jednego lub
-   wszystkich jêzyków
- - najlepsza gwarancja wy¶wietlania stron we wszystkich przegl±darkach
-   dziêki zgodno¶ci ze standardem HTML 4.01 transitional
- - standardowe API i obszerna dokumentacja, pozwalaj±ce na ³atwe
-   tworzenie dodatkowej funkcjonalno¶ci poprzez modu³y i bloki.
+- konfigurowalno¶æ wszystkich aspektów wygl±du serwisu WWW poprzez
+  motywy, wraz z obs³ug± CSS
+- mo¿liwo¶æ okre¶lenia elementów jako odpowiednich dla jednego lub
+  wszystkich jêzyków
+- najlepsza gwarancja wy¶wietlania stron we wszystkich przegl±darkach
+  dziêki zgodno¶ci ze standardem HTML 4.01 transitional
+- standardowe API i obszerna dokumentacja, pozwalaj±ce na ³atwe
+  tworzenie dodatkowej funkcjonalno¶ci poprzez modu³y i bloki.
 
 Ten pakiet zawiera dodatkowe modu³y:
 - ContentExpress-%{_ceversion}
