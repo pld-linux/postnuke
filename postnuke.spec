@@ -1,6 +1,7 @@
 # TODO:
 # - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011203.html
 # - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011366.html
+# - SECURITY: http://securitytracker.com/alerts/2004/Oct/1011938.html
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
