@@ -1,10 +1,14 @@
 Summary:	weblog/Content Management System (CMS)
 Name:		postnuke
 Version:	0.7.2.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://www.postnuke.com/downloads/pn-%{version}_phoenix.tgz
+# Should be removed in next release
+# Original from: http://www.postnuke.com/downloads/pnsecuritypatch-002h.zip
+Source1:	%{name}-index.php
+Source2:	%{name}-pnAPI.php
 URL:		http://www.postnuke.com/
 Requires:	php-mysql >= 4.0.2
 Requires:	webserver
@@ -36,7 +40,10 @@ Some of the highlights of PostNuke are:
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{nukeroot}
 
+install %{SOURCE1} html/modules/Web_Links/index.php
+install %{SOURCE2} html/includes/pnAPI.php
 cp -ar html/* $RPM_BUILD_ROOT%{nukeroot}
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
