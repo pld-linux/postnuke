@@ -2,7 +2,7 @@ Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
 Version:	0.7.5.0a
-Release:	1.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-0.750a.tar.gz
@@ -21,7 +21,7 @@ Requires:	webserver
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		nukeroot	/home/services/httpd
+%define		nukeroot	/home/services/httpd/html/postnuke
 
 %description
 PostNuke is a weblog/Content Management System (CMS). It is far more
