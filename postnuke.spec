@@ -20,7 +20,7 @@ Requires:	webserver
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		nukeroot	/home/httpd/html/postnuke
+%define		nukeroot	/home/services/httpd/html/postnuke
 
 %description
 PostNuke is a weblog/Content Management System (CMS). It is far more
