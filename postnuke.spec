@@ -1,22 +1,18 @@
-# TODO:
-# - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011203.html
-# - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011366.html
-# - SECURITY: http://securitytracker.com/alerts/2004/Oct/1011938.html
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
-Version:	0.7.5.0
-Release:	3
+Version:	0.7.5.0a
+Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Source0:	http://download.hostnuke.com/sf/postnuke/PostNuke-0.750.tar.gz
-# Source0-md5:	237975777086466ced38e55321981274
+Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-0.750a.tar.gz
+# Source0-md5:	dcb276fa0aae4e22764eb22fd66ccd09
 # ContentExpress
 %define		_ceversion	1.2.7.5
 Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
 # Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
 # Polish lang pack
-Source2:	pn-%{version}-pl.tar.gz
+Source2:	pn-0.7.5.0-pl.tar.gz
 # Source2-md5:	424d6be38badb2925fe6c8c5c39f3930
 URL:		http://www.postnuke.com/
 Requires:	php-exif
