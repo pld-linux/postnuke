@@ -1,18 +1,14 @@
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania zawarto¶ci±
 Name:		postnuke
-Version:	0.7.2.1
-Release:	3
+Version:	0.7.2.2
+Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Source0:	http://www.postnuke.com/downloads/pn-%{version}_phoenix.tgz
-# Should be removed in next release
-# Original from: http://www.postnuke.com/downloads/pnsecuritypatch-002h.zip
-Source1:	%{name}-index.php
-Source2:	%{name}-pnAPI.php
+Source0:	http://developers.postnuke.com/downloads/pn-7.2.2/core/gzip/%{name}-phoenix-%{version}.tar.gz
 # ContentExpress
 %define		_ceversion	1.2.4.1
-Source3:	ce-%{_ceversion}.zip
+Source1:	ce-%{_ceversion}.zip
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
@@ -59,23 +55,51 @@ Niektóre zalety PostNuke to:
 Ten pakiet zawiera dodatkowe modu³y:
 - ContentExpress-%{_ceversion}
 
+%package install
+Summary:	weblog/Content Management System (CMS)
+Summary(pl):	System zarz±dzania zawarto¶ci±
+Group:		Applications/Databases/Interfaces
+Requires:	postnuke
+
+%description install
+Package needed to install postnuke
+
+%description -l pl install
+Pakiet potrzebny do zainstalowania postnuke
+
 %prep
-%setup -q -n pn-%{version}_Phoenix -a3
+%setup -q -n %{name}-phoenix-%{version} -a1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{nukeroot}
 
-install %{SOURCE1} html/modules/Web_Links/index.php
-install %{SOURCE2} html/includes/pnAPI.php
-cp -ar html/* $RPM_BUILD_ROOT%{nukeroot}
+cp -ar html/		$RPM_BUILD_ROOT%{nukeroot}
+cp -ar includes/	$RPM_BUILD_ROOT%{nukeroot}
+cp -ar modules/		$RPM_BUILD_ROOT%{nukeroot}
+install index.php	$RPM_BUILD_ROOT%{nukeroot}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post install
+echo "Remember to uninstall %{name}-isntall after initiation of postnuke!!"
+
 %files
 %defattr(644,root,root,755)
-%doc ChangLog CREDITS.txt INSTALL.txt phoenix-sql/*
+%doc ChangeLog CREDITS.txt INSTALL.txt phoenix-sql/*
 %dir %{nukeroot}
-%attr(640,http,http) %config(noreplace) %{nukeroot}/config*.php
-%{nukeroot}/[^c]*
+%attr(640,http,http) %config(noreplace) %{nukeroot}/html/config*.php
+%{nukeroot}/html/[^ci]*
+%{nukeroot}/html/images/*
+%{nukeroot}/html/includes/*
+%{nukeroot}/includes/
+%{nukeroot}/modules/
+%{nukeroot}/html/index.php
+%{nukeroot}/index.php
+
+%files install
+%defattr(644,root,root,755)
+%dir %{nukeroot}/html/install
+%attr(640,http,http) %{nukeroot}/html/install/*
+%attr(640,http,http) %{nukeroot}/html/install.php
