@@ -6,11 +6,13 @@ Release:	2
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://developers.postnuke.com/downloads/pn-7.2.3/%{name}-phoenix-%{version}.tar.gz
+# Source0-md5:	7b4e49d1724c8e28f9fc2afa381d41e5
 # ContentExpress
 %define		_ceversion	1.2.4.1
 Source1:	ce-%{_ceversion}.zip
 # Polish lang pack
 Source2:	pn-%{version}-pl.tar.gz
+# Source2-md5:	dfc1b697125b0e42c65bfff7ff5ddeab
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
