@@ -4,7 +4,7 @@ Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
 Version:	0.7.5.0
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://download.hostnuke.com/sf/postnuke/PostNuke-0.750.tar.gz
