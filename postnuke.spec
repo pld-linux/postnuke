@@ -53,5 +53,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangLog CREDITS.txt INSTALL.txt phoenix-sql/*
 %dir %{nukeroot}
-%attr(640,http,http) %config(noreplace) %{nukeroot}/config.php
+%attr(640,http,http) %config(noreplace) %{nukeroot}/config*.php
 %{nukeroot}/[^c]*
