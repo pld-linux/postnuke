@@ -1,4 +1,5 @@
 Summary:	weblog/Content Management System (CMS)
+Summary(pl):	System zarz±dzania zawarto¶ci±
 Name:		postnuke
 Version:	0.7.2.1
 Release:	3
@@ -40,6 +41,24 @@ Some of the highlights of PostNuke are:
 This package includes additional modules:
 - ContentExpress-%{_ceversion}
 
+%description -l pl
+PostNuke jest systemem zarz±dzania zawarto¶ci±. Jest du¿o bardziej
+bezpieczny i stabilny ni¿ konkurencyjne produkty i mo¿e z ³atwo¶ci±
+dzia³aæ w ¶rodowiskach z du¿ym ruchem.
+
+Niektóre zalety PostNuke to:
+ - konfigurowalno¶æ wszystkich aspektów wygl±du serwisu WWW poprzez
+   motywy, wraz z obs³ug± CSS
+ - mo¿liwo¶æ okre¶lenia elementów jako odpowiednich dla jednego lub
+   wszystkich jêzyków
+ - najlepsza gwarancja wy¶wietlania stron we wszystkich przegl±darkach
+   dziêki zgodno¶ci ze standardem HTML 4.01 transitional
+ - standardowe API i obszerna dokumentacja, pozwalaj±ce na ³atwe
+   tworzenie dodatkowej funkcjonalno¶ci poprzez modu³y i bloki.
+ 
+Ten pakiet zawiera dodatkowe modu³y:
+- ContentExpress-%{_ceversion}
+
 %prep
 %setup -q -n pn-%{version}_Phoenix -a3
 
@@ -50,7 +69,6 @@ install -d $RPM_BUILD_ROOT%{nukeroot}
 install %{SOURCE1} html/modules/Web_Links/index.php
 install %{SOURCE2} html/includes/pnAPI.php
 cp -ar html/* $RPM_BUILD_ROOT%{nukeroot}
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
