@@ -1,11 +1,11 @@
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
-Version:	0.7.2.2
+Version:	0.7.2.3
 Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Source0:	http://developers.postnuke.com/downloads/pn-7.2.2/core/gzip/%{name}-phoenix-%{version}.tar.gz
+Source0:	http://developers.postnuke.com/downloads/pn-7.2.3/%{name}-phoenix-%{version}.tar.gz
 # ContentExpress
 %define		_ceversion	1.2.4.1
 Source1:	ce-%{_ceversion}.zip
