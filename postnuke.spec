@@ -1,7 +1,7 @@
 Summary:	weblog/Content Management System (CMS)
 Name:		postnuke
 Version:	0.7.2.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
 Source0:	http://www.postnuke.com/downloads/pn-%{version}_phoenix.tgz
@@ -9,6 +9,9 @@ Source0:	http://www.postnuke.com/downloads/pn-%{version}_phoenix.tgz
 # Original from: http://www.postnuke.com/downloads/pnsecuritypatch-002h.zip
 Source1:	%{name}-index.php
 Source2:	%{name}-pnAPI.php
+# ContentExpress
+%define		_ceversion	1.2.4.1
+Source3:	ce-%{_ceversion}.zip
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
@@ -34,8 +37,11 @@ Some of the highlights of PostNuke are:
 - A standard API and extensive documentation to allow for easy
   creation of extended functionality through modules and blocks
 
+This package includes additional modules:
+- ContentExpress-%{_ceversion}
+
 %prep
-%setup -q -n pn-%{version}_Phoenix
+%setup -q -n pn-%{version}_Phoenix -a3
 
 %install
 rm -rf $RPM_BUILD_ROOT
