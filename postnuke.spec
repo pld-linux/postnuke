@@ -68,7 +68,7 @@ Requires:	%{name} = %{version}
 %description install
 Package needed to install postnuke.
 
-%description -l pl install
+%description install -l pl
 Pakiet potrzebny do zainstalowania postnuke.
 
 %prep
