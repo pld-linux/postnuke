@@ -9,6 +9,8 @@ Source0:	http://developers.postnuke.com/downloads/pn-7.2.3/%{name}-phoenix-%{ver
 # ContentExpress
 %define		_ceversion	1.2.4.1
 Source1:	ce-%{_ceversion}.zip
+# Polish lang pack
+Source2:	pn-%{version}-pl.tar.gz
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
@@ -68,7 +70,7 @@ Package needed to install postnuke.
 Pakiet potrzebny do zainstalowania postnuke.
 
 %prep
-%setup -q -n %{name}-phoenix-%{version} -a1
+%setup -q -n %{name}-phoenix-%{version} -a1 -a2
 
 %install
 rm -rf $RPM_BUILD_ROOT
