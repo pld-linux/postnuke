@@ -1,5 +1,5 @@
 Summary:	weblog/Content Management System (CMS)
-Summary(pl):	System zarz±dzania zawarto¶ci±
+Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
 Version:	0.7.2.2
 Release:	1
@@ -38,7 +38,7 @@ This package includes additional modules:
 - ContentExpress-%{_ceversion}
 
 %description -l pl
-PostNuke jest systemem zarz±dzania zawarto¶ci±. Jest du¿o bardziej
+PostNuke jest systemem zarz±dzania tre¶ci±. Jest du¿o bardziej
 bezpieczny i stabilny ni¿ konkurencyjne produkty i mo¿e z ³atwo¶ci±
 dzia³aæ w ¶rodowiskach z du¿ym ruchem.
 
@@ -56,16 +56,16 @@ Ten pakiet zawiera dodatkowe modu³y:
 - ContentExpress-%{_ceversion}
 
 %package install
-Summary:	weblog/Content Management System (CMS)
-Summary(pl):	System zarz±dzania zawarto¶ci±
+Summary:	weblog/Content Management System (CMS) - installer
+Summary(pl):	System zarz±dzania tre¶ci± - instalator
 Group:		Applications/Databases/Interfaces
-Requires:	postnuke
+Requires:	%{name} = %{version}
 
 %description install
-Package needed to install postnuke
+Package needed to install postnuke.
 
 %description -l pl install
-Pakiet potrzebny do zainstalowania postnuke
+Pakiet potrzebny do zainstalowania postnuke.
 
 %prep
 %setup -q -n %{name}-phoenix-%{version} -a1
@@ -89,12 +89,13 @@ echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 %defattr(644,root,root,755)
 %doc ChangeLog CREDITS.txt INSTALL.txt phoenix-sql/*
 %dir %{nukeroot}
+%dir %{nukeroot}/html
 %attr(640,http,http) %config(noreplace) %{nukeroot}/html/config*.php
 %{nukeroot}/html/[^ci]*
-%{nukeroot}/html/images/*
-%{nukeroot}/html/includes/*
-%{nukeroot}/includes/
-%{nukeroot}/modules/
+%{nukeroot}/html/images
+%{nukeroot}/html/includes
+%{nukeroot}/includes
+%{nukeroot}/modules
 %{nukeroot}/html/index.php
 %{nukeroot}/index.php
 
