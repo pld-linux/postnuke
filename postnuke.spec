@@ -1,19 +1,19 @@
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
-Version:	0.7.5.0a
+Version:	0.761
 Release:	1
 License:	GPL v2
 Group:		Applications/Databases/Interfaces
-Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-0.750a.tar.gz
-# Source0-md5:	dcb276fa0aae4e22764eb22fd66ccd09
+Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-%{version}.tar.gz
+# Source0-md5:	4b76e09c507db0224d34fc448e7efb91
 # ContentExpress
 %define		_ceversion	1.2.7.5
 Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
 # Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
 # Polish lang pack
-Source2:	pn-0.7.5.0-pl.tar.gz
-# Source2-md5:	08e6850526cb8372a1e6b50bc3c1e155
+Source2:	pn-0.760-pl.tar.gz
+# Source2-md5:	635f46d8a622a6cbff23da18ef19c95d
 URL:		http://www.postnuke.com/
 Requires:	php-exif
 Requires:	php-mysql >= 4.0.2
@@ -72,7 +72,7 @@ Package needed to install postnuke.
 Pakiet potrzebny do zainstalowania postnuke.
 
 %prep
-%setup -q -n PostNuke-0.750 -a1 -a2
+%setup -q -n PostNuke-%{version} -a1 -a2
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,7 +91,7 @@ echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 
 %files
 %defattr(644,root,root,755)
-%doc html/docs/ChangeLog.txt html/docs/CREDITS.txt phoenix-sql/*
+%doc phoenix-sql/*
 %dir %{nukeroot}
 %dir %{nukeroot}/html
 %attr(640,http,http) %config(noreplace) %{nukeroot}/html/config*.php
