@@ -1,13 +1,26 @@
 # TODO
 # - put pl language pack into separate package, such overwriting of
 #   the original files is discriminating:)
+#   conflicting files list:
+#   $ tar tvf ../../../SOURCES/pn-0.760-pl.tar.gz |grep -v /pol/|grep -v '/$'
+#   html/docs/COPYING.txt
+#   html/includes/pnAPI.php
+#   html/includes/templates/dbconnectionerror.htm
+#   html/includes/templates/index.html
+#   html/includes/templates/siteoff.htm
+#   html/install/modify_config.php
+#   html/install/newdata.php
+#   html/install/upgrade.php
+#   html/language/languages.php
+#   html/modules/index.html
 # - contentexpress module is not installed
 # - use system Smarty and adodb
+# - %%lang for install/lang/pol,fra,... messages?
 Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
 Version:	0.762
-Release:	1.11
+Release:	1.15
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-%{version}.tar.gz
@@ -16,17 +29,20 @@ Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-%{version}.tar.gz
 %define		_ceversion	1.2.7.5
 Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
 # Source1-md5:	94840261251bbfa5b4b113d0f3c7faef
-# Polish lang pack
+# Polish lang hpack
 Source2:	pn-0.760-pl.tar.gz
 # Source2-md5:	635f46d8a622a6cbff23da18ef19c95d
 Source3:	%{name}-apache.conf
 Patch0:		%{name}-pnTemp.patch
+Patch1:		%{name}-config.patch
+Patch2:		%{name}-smarty.patch
 URL:		http://www.postnuke.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	php-exif
 Requires:	php-mysql >= 3:4.0.2
 Requires:	php-tokenizer
 Requires:	webapps
+Requires:	Smarty >= 2.6.10-4
 Obsoletes:	postnuke-install
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -35,6 +51,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_webapp		%{name}
 %define		_sysconfdir	%{_webapps}/%{_webapp}
 %define		_appdir		%{_datadir}/%{_webapp}
+%define		_smartyplugindir	/usr/share/php/Smarty/plugins
 
 %description
 PostNuke is a weblog/Content Management System (CMS). It is far more
@@ -90,24 +107,31 @@ pozostawienie plików instalacyjnych mog³oby byæ niebezpieczne.
 
 %prep
 %setup -q -n PostNuke-%{version} -a1 -a2
-# undos the source
+# dosi reavahetused maha. lihtsam pätsida.
 find . -type f -print0 | xargs -0 sed -i -e 's,\r$,,'
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
+# pole mõtet seda vana faili sinna toppida
 > html/config-old.php
+
+# roogime smarti välja
+install -d smarty
+mv html/includes/classes/Smarty/plugins/resource.{userdb,var}.php smarty
+rm -rf html/includes/classes/Smarty
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/lib/postnuke}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/lib/postnuke,%{_smartyplugindir}}
 cp -a html/* $RPM_BUILD_ROOT%{_appdir}
 mv $RPM_BUILD_ROOT%{_appdir}/config.php $RPM_BUILD_ROOT%{_sysconfdir}
 mv $RPM_BUILD_ROOT%{_appdir}/config-old.php $RPM_BUILD_ROOT%{_sysconfdir}
 mv $RPM_BUILD_ROOT%{_appdir}/pnTemp $RPM_BUILD_ROOT/var/lib/postnuke
-ln -s %{_sysconfdir}/config.php $RPM_BUILD_ROOT%{_appdir}
-ln -s %{_sysconfdir}/config-old.php $RPM_BUILD_ROOT%{_appdir}
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install -p %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
+install -p %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install -p smarty/* $RPM_BUILD_ROOT%{_smartyplugindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -164,6 +188,7 @@ fi
 %{_appdir}/*.php
 %{_appdir}/*.txt
 %exclude %{_appdir}/install.php
+%{_smartyplugindir}/*
 
 %defattr(644,http,http,755)
 /var/lib/postnuke
