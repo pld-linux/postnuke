@@ -16,7 +16,7 @@ Source2:	pn-0.760-pl.tar.gz
 # Source2-md5:	635f46d8a622a6cbff23da18ef19c95d
 URL:		http://www.postnuke.com/
 Requires:	php-exif
-Requires:	php-mysql >= 4.0.2
+Requires:	php-mysql >= 3:4.0.2
 Requires:	webserver
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
