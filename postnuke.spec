@@ -78,10 +78,8 @@ Pakiet potrzebny do zainstalowania postnuke.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{nukeroot}
 
-cp -ar html/		$RPM_BUILD_ROOT%{nukeroot}
-cp -ar html/includes/	$RPM_BUILD_ROOT%{nukeroot}
-cp -ar html/modules/		$RPM_BUILD_ROOT%{nukeroot}
-install html/index.php	$RPM_BUILD_ROOT%{nukeroot}
+cp -ar html/*/		$RPM_BUILD_ROOT%{nukeroot}
+cp -ar html/*		$RPM_BUILD_ROOT%{nukeroot}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,18 +91,16 @@ echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 %defattr(644,root,root,755)
 %doc phoenix-sql/*
 %dir %{nukeroot}
-%dir %{nukeroot}/html
-%attr(640,http,http) %config(noreplace) %{nukeroot}/html/config*.php
-%{nukeroot}/html/[^ci]*
-%{nukeroot}/html/images
-%{nukeroot}/html/includes
+%attr(640,http,http) %config(noreplace) %{nukeroot}/config*.php
+%attr(755,http,http) %{nukeroot}/pnTemp/*
+%{nukeroot}/[^ci,^cp]*
+%{nukeroot}/images
 %{nukeroot}/includes
-%{nukeroot}/modules
-%{nukeroot}/html/index.php
 %{nukeroot}/index.php
+%{nukeroot}/p*.php
 
 %files install
 %defattr(644,root,root,755)
-%dir %{nukeroot}/html/install
-%attr(640,http,http) %{nukeroot}/html/install/*
-%attr(640,http,http) %{nukeroot}/html/install.php
+%dir %{nukeroot}/install
+%attr(750,http,http) %{nukeroot}/install/*
+%attr(750,http,http) %{nukeroot}/install.php
