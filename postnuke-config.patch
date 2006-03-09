@@ -1,0 +1,210 @@
+diff -ur PostNuke-0.762/html/modules/Admin/pnadmin.php PostNuke-0.762.config/html/modules/Admin/pnadmin.php
+--- PostNuke-0.762/html/modules/Admin/pnadmin.php	2006-03-10 01:09:47.000000000 +0200
++++ PostNuke-0.762.config/html/modules/Admin/pnadmin.php	2006-03-10 01:09:02.000000000 +0200
+@@ -948,8 +948,8 @@
+     $config_php = (bool) is_writable('config.php');
+     $pnRender->assign('config_php', $config_php);
+ 
+-    // check for config-old.php beeing writable
+-    $config_old_php = (bool) is_writable('config-old.php');
++    // check for /etc/webapps/postnuke/config.php.bak beeing writable
++    $config_old_php = (bool) is_writable('/etc/webapps/postnuke/config.php.bak');
+     $pnRender->assign('config_old_php', $config_old_php);
+ 
+     // check for .htaccess in /var/lib/postnuke/pnTemp
+diff -ur PostNuke-0.762/html/modules/Admin/pnlang/eng/admin.php PostNuke-0.762.config/html/modules/Admin/pnlang/eng/admin.php
+--- PostNuke-0.762/html/modules/Admin/pnlang/eng/admin.php	2006-03-10 01:09:47.000000000 +0200
++++ PostNuke-0.762.config/html/modules/Admin/pnlang/eng/admin.php	2006-03-10 01:09:02.000000000 +0200
+@@ -37,7 +37,7 @@
+ define('_ADMIN_MAGIC_QUOTES','Notice: <a href="http://php.net/magic_quotes">magic_quotes_gpc</a> is off!');
+ define('_ADMIN_REGISTER_GLOBALS','Notice: <a href="http://php.net/register_globals">register_globals</a> is on!');
+ define('_ADMIN_CONFIG_PHP','Notice: config.php is writable (hint: chmod 644 or chmod 444)!');
+-define('_ADMIN_CONFIG_OLD_PHP','Notice: config-old.php is writable (hint: chmod 644 or chmod 444)!');
++define('_ADMIN_CONFIG_OLD_PHP','Notice: /etc/webapps/postnuke/config.php.bak is writable (hint: chmod 644 or chmod 444)!');
+ define('_ADMIN_PNTEMP_HTACCESS','Notice: /var/lib/postnuke/pnTemp-folder should be secured with .htaccess.');
+ define('_ADMINCONTINUE','Continue');
+ define('_ADMININSTALLWARNING','Warning! Please remove the file  install.php and the folder called install from the root of your PostNuke web site before proceeding');
+diff -ur PostNuke-0.762/html/modules/Admin/pnlang/pol/admin.php PostNuke-0.762.config/html/modules/Admin/pnlang/pol/admin.php
+--- PostNuke-0.762/html/modules/Admin/pnlang/pol/admin.php	2006-03-10 01:09:47.000000000 +0200
++++ PostNuke-0.762.config/html/modules/Admin/pnlang/pol/admin.php	2006-03-10 01:09:02.000000000 +0200
+@@ -37,7 +37,7 @@
+ define('_ADMIN_MAGIC_QUOTES','Uwaga: <a href="http://pl.php.net/magic_quotes">magic_quotes_gpc</a> wy³±czone!');
+ define('_ADMIN_REGISTER_GLOBALS','Uwaga: <a href="http://pl.php.net/register_globals">register_globals</a> w³±czone!');
+ define('_ADMIN_CONFIG_PHP','Uwaga: config.php jest zapisywalny (ustaw: chmod 644)!');
+-define('_ADMIN_CONFIG_OLD_PHP','Uwaga: config-old.php jest zapisywalny (ustaw: chmod 644)!');
++define('_ADMIN_CONFIG_OLD_PHP','Uwaga: /etc/webapps/postnuke/config.php.bak jest zapisywalny (ustaw: chmod 644)!');
+ define('_ADMIN_PNTEMP_HTACCESS','Uwaga: folder /var/lib/postnuke/pnTemp powinien byæ zabezpieczony za pomoc± .htaccess.');
+ define('_ADMINCONTINUE','Kontynuuj');
+ define('_ADMININSTALLWARNING','Ostrze¿enie! Proszê usun±æ plik `install.php` oraz folder `install` z g³ównego katalogu PostNuke!');
+diff -ur PostNuke-0.762/html/install/check.php PostNuke-0.762.config/html/install/check.php
+--- PostNuke-0.762/html/install/check.php	2006-03-10 01:12:07.000000000 +0200
++++ PostNuke-0.762.config/html/install/check.php	2006-03-10 01:11:34.000000000 +0200
+@@ -63,7 +63,7 @@
+         $chmod = 1;
+     } 
+ 
+-    $file = 'config-old.php'; 
++    $file = '/etc/webapps/postnuke/config.php.bak'; 
+     // $mode = fileperms($file);
+     // $mode &= 0x1ff; # Remove the bits we don't need
+     // $chmod = sprintf("%o", $mode);
+diff -ur PostNuke-0.762/html/install/lang/cro/global.php PostNuke-0.762.config/html/install/lang/cro/global.php
+--- PostNuke-0.762/html/install/lang/cro/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/cro/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -46,8 +46,8 @@
+ define('_CHMOD_CHECK_2','Mi èemo prvo provjeriti CHMOD to jest moguènost da se otvori datoteka i piše u njoj. Ako se to nemože, naredbena datoteka neèe moæi zakriti informacije kod Vaše datoteke konfiguracije (<i>config.php</i>). Zakriti informacije za ulazak na bazu podataka je jako važno za sigurnost Vašeg Sajta, zato je napravjena ova naredbena datoteka. Vi neèete moæi poslje promjeniti parametre administacije kada budu konfigurani.');
+ define('_CHMOD_CHECK_3','CHMOD kod config.php je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
+ define('_CHMOD_CHECK_4','Molimo Vas da promjenite CHMOD kod config.php na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
+-define('_CHMOD_CHECK_5','CHMOD kod config-old.php je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
+-define('_CHMOD_CHECK_6','Molimo Vas da promjenite CHMOD kod config-old.php na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
++define('_CHMOD_CHECK_5','CHMOD kod /etc/webapps/postnuke/config.php.bak je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
++define('_CHMOD_CHECK_6','Molimo Vas da promjenite CHMOD kod /etc/webapps/postnuke/config.php.bak na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
+ define('_CHM_CHECK_1','Unesite informacije o Vašoj Bazi Podataka. Ako Vi nemate ovlasti na serveru gdje se nalazi Vaša Baza Podataka (<i>hébergement mutualisé, itd...</>), Vi morate prvo napraviti Vašu Bazu Podataka prije nego što nastavite. Ako Vi nemožete napraviti sami Vašu Bazu Podataka zato što ste na besplatnom hosting ili nemate potrebne ovlasti, ova naredbena datoteka neèe moæi Vam napraviti BP. Ova naredbena datoteka može samo staviti informacije u Vašu BP koje mora biti aktivna to jest raditi. ');
+ define('_CONTINUE_1','Postavke Vaše Baze Podataka');
+ define('_CONTINUE_2','Vi sada možete definirati Vaš raèu admin. Ako vi skoèite ovu etapu, Vaš raèu admin æ biti Admin/ (pažnja sa velikom i malim slovima) to jest nema lozinke. Bilo bi bolje da definirate sada a ne poslje.');
+diff -ur PostNuke-0.762/html/install/lang/deu/global.php PostNuke-0.762.config/html/install/lang/deu/global.php
+--- PostNuke-0.762/html/install/lang/deu/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/deu/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -238,11 +238,11 @@
+ define("_CHANGE_INFO_0","Daten ändern");
+ define("_CHANGE_INFO_1","Bitte die Datenbank-Information korrigieren");
+ define("_CHMOD_CHECK_1","CHMOD-Überprüfung");
+-define("_CHMOD_CHECK_2","Es wird zuerst überprüft, ob die Schreibrechte (CHMOD) von config.php und config-old.php korrekt gesetzt sind, ansonsten wird dieses Skript nicht in der Lage sein, die Datenbank-Informationen zu verschlüsseln.<br />Die Verschlüsselung der Datenbank-Informationen ist eine zusätzliche Sicherheit.");
++define("_CHMOD_CHECK_2","Es wird zuerst überprüft, ob die Schreibrechte (CHMOD) von config.php und /etc/webapps/postnuke/config.php.bak korrekt gesetzt sind, ansonsten wird dieses Skript nicht in der Lage sein, die Datenbank-Informationen zu verschlüsseln.<br />Die Verschlüsselung der Datenbank-Informationen ist eine zusätzliche Sicherheit.");
+ define("_CHMOD_CHECK_3","Schreibrechte (CHMOD) für config.php sind 666 - korrekt, das Skript kann in die Datei schreiben.");
+ define("_CHMOD_CHECK_4","Bitte die Schreibrechte (CHMOD) für config.php auf 666 setzen, damit das Skript in die Datei schreiben kann.");
+-define("_CHMOD_CHECK_5","Schreibrechte (CHMOD) für config-old.php sind 666 - korrekt, das Skript kann in die Datei schreiben.");
+-define("_CHMOD_CHECK_6","Bitte die Schreibrechte (CHMOD) für config-old.php auf 666 setzen, damit das Skript in die Datei schreiben kann.");
++define("_CHMOD_CHECK_5","Schreibrechte (CHMOD) für /etc/webapps/postnuke/config.php.bak sind 666 - korrekt, das Skript kann in die Datei schreiben.");
++define("_CHMOD_CHECK_6","Bitte die Schreibrechte (CHMOD) für /etc/webapps/postnuke/config.php.bak auf 666 setzen, damit das Skript in die Datei schreiben kann.");
+ define("_CHM_CHECK_1", "Bitte die Datenbank-Informationen eingeben.<br />Falls kein Root-Zugriff auf MySQL besteht, können keine neuen Datenbanken angelegt werden - in diesem Fall die Datenbank angeben, in die das Skript die erforderlichen Tabellen anlegen soll.");
+ define("_CONTINUE_1","Datenbankeinstellungen setzen");
+ define("_CONTINUE_2","<br />Jetzt sollte der Administrator-Account individuell eingerichtet werden - ansonsten ist der Benutzername <b>Admin</b> und das Passwort <b>Password</b> (Achtung Gross/Kleinschreibung beachten).<br /><b>Eine individuelle Einstellung ist aus Sicherheitsgründen dringend empfohlen!</b>");
+diff -ur PostNuke-0.762/html/install/lang/eng/global.php PostNuke-0.762.config/html/install/lang/eng/global.php
+--- PostNuke-0.762/html/install/lang/eng/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/eng/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -50,8 +50,8 @@
+ define('_CHMOD_CHECK_2','We will first check to see that your file permissions are correct in order for the script to write to the file. If your settings are not correct, this script will not be able to encrypt your data in your config file. Encrypting the SQL data is added security, and is set by this script. You will also not be able to update your preferences from your admin once your site is up and running.');
+ define('_CHMOD_CHECK_3','File permissions for config.php are 666 -- correct, this script can write to the file');
+ define('_CHMOD_CHECK_4','Please change permissions on config.php to 666 so this script can write and encrypt the DB data (HINT: use "chmod")');
+-define('_CHMOD_CHECK_5','File permissions for config-old.php are 666 -- correct, this script can write to the file');
+-define('_CHMOD_CHECK_6','Please change permissions on config-old.php to 666 so this script can write and encrypt the DB data (HINT: use "chmod")');
++define('_CHMOD_CHECK_5','File permissions for /etc/webapps/postnuke/config.php.bak are 666 -- correct, this script can write to the file');
++define('_CHMOD_CHECK_6','Please change permissions on /etc/webapps/postnuke/config.php.bak to 666 so this script can write and encrypt the DB data (HINT: use "chmod")');
+ define('_CHM_CHECK_1','Please enter your DB info. If you do not have root access to your DB (virtual hosting, etc), you will need to make your database before you proceed. A good rule of thumb, if you cannot create databases through phpMyAdmin because of virtual hosting, or security on mySQL, then this script will not be able to create the db for you. This script will still be able to fill the database, and will still need to be run.<br><br>If you do not know the values for the database host, username or password, leave them as their current defaults.  <br><br><b>PLEASE NOTE: Some hosts use 127.0.0.1 as the database host.  If you get an error "unable to connect to MySQL socket", try changing to 127.0.0.1 </b><br><br>If problems persist please contact your ISP who should be able to provide the information for you.');
+ define('_CONTINUE_1','Setting Your DB Preferences');
+ define('_CONTINUE_2','You can now set up your administrative account. If you pass on this set up, your login for the administrative account will be Admin / Password (case sensitive).  It is advisable to set it up now, and not wait until later.');
+diff -ur PostNuke-0.762/html/install/lang/fra/global.php PostNuke-0.762.config/html/install/lang/fra/global.php
+--- PostNuke-0.762/html/install/lang/fra/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/fra/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -50,8 +50,8 @@
+ define('_CHMOD_CHECK_2','Nous allons d\'abord vérifier que les droits d\'accès (CHMOD) permettent au script d\'écrire dans le fichier de configuration. S\'ils ne sont pas corrects, le script ne pourra pas encrypter les données de votre fichier de configuration. Encrypter les données d\'accès à la base est important pour la sécurité, c\'est un des objectifs de ce script. Vous ne pourrez plus changer vos paramètres d\'administration une fois ceux-ci configurés.');
+ define('_CHMOD_CHECK_3','Les droits CHMOD de config.php sont à 666 -- OK, ce script peut mettre le fichier à jour');
+ define('_CHMOD_CHECK_4','Veuillez changer les droits CHMOD de config.php à 666 pour que le script puisse mettre à jour et encrypter vos infos de BD');
+-define('_CHMOD_CHECK_5','Les droits CHMOD de config-old.php sont à 666 -- OK, ce script peut mettre le fichier à jour');
+-define('_CHMOD_CHECK_6','Veuillez changer les droits CHMOD de config-old.php à 666 pour que le script pusse mettre à jour et encrypter vos infos de BD');
++define('_CHMOD_CHECK_5','Les droits CHMOD de /etc/webapps/postnuke/config.php.bak sont à 666 -- OK, ce script peut mettre le fichier à jour');
++define('_CHMOD_CHECK_6','Veuillez changer les droits CHMOD de /etc/webapps/postnuke/config.php.bak à 666 pour que le script pusse mettre à jour et encrypter vos infos de BD');
+ define('_CHM_CHECK_1','Svp., entrez vos informations de Base de données. Si vous n\'avez pas l\'accès \'\'root\'\' à votre Base de données (serveur virtuel ou mutualisé, etc), vous devrez préalablement créer votre base de données avant de procéder. En règle générale, si vous ne pouvez pas créer la base de données par phpMyAdmin à cause de votre hébergement ou de la sécurité sur mySQL, ce script ne pourra pas la créer pour vous. Ce script devra quand même être exécuté et pourra remplir la base de données existante.<br><br>Si vous ne connaissez pas les valeurs pour l\'hôte de base de données, l\'utilisateur ou le mot de passe, laissez les valeurs par défaut.  <br><br><b>NOTE : Certains serveurs utilisent 127.0.0.1 comme hôte de base de données. Si vous obtenez une erreur "Impossible de se connecter à la base MySQL", essayez de changer l\'hôte par défaut en inscrivant 127.0.0.1 </b><br><br>Si des problèmes persistent, contactez votre hébergeur afin d\'obtenir vos informations de connexion. ');
+ define('_CONTINUE_1','Préférences de votre BD');
+ define('_CONTINUE_2','Vous pouvez maintenant définir votre compte admin. Si vous passez cette étape, votre compte admin sera Admin/Password (attention aux majuscules/minuscules). Il vaut mieux le définir maintenant et non plus tard.');
+diff -ur PostNuke-0.762/html/install/lang/hrv/global.php PostNuke-0.762.config/html/install/lang/hrv/global.php
+--- PostNuke-0.762/html/install/lang/hrv/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/hrv/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -46,8 +46,8 @@
+ define('_CHMOD_CHECK_2','Mi èemo prvo provjeriti CHMOD to jest moguènost da se otvori datoteka i piše u njoj. Ako se to nemože, naredbena datoteka neèe moæi zakriti informacije kod Vaše datoteke konfiguracije (<i>config.php</i>). Zakriti informacije za ulazak na bazu podataka je jako važno za sigurnost Vašeg Sajta, zato je napravjena ova naredbena datoteka. Vi neèete moæi poslje promjeniti parametre administacije kada budu konfigurani.');
+ define('_CHMOD_CHECK_3','CHMOD kod config.php je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
+ define('_CHMOD_CHECK_4','Molimo Vas da promjenite CHMOD kod config.php na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
+-define('_CHMOD_CHECK_5','CHMOD kod config-old.php je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
+-define('_CHMOD_CHECK_6','Molimo Vas da promjenite CHMOD kod config-old.php na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
++define('_CHMOD_CHECK_5','CHMOD kod /etc/webapps/postnuke/config.php.bak je na 666 -- OK, ova naredbena datoteka mož ažurirati datoteku');
++define('_CHMOD_CHECK_6','Molimo Vas da promjenite CHMOD kod /etc/webapps/postnuke/config.php.bak na 666 da bi naredbena dateteka mogla ažurirati i zakriti Vaše informacije o bazi podataka');
+ define('_CHM_CHECK_1','Unesite informacije o Vašoj Bazi Podataka. Ako Vi nemate ovlasti na serveru gdje se nalazi Vaša Baza Podataka (<i>hébergement mutualisé, itd...</>), Vi morate prvo napraviti Vašu Bazu Podataka prije nego što nastavite. Ako Vi nemožete napraviti sami Vašu Bazu Podataka zato što ste na besplatnom hosting ili nemate potrebne ovlasti, ova naredbena datoteka neèe moæi Vam napraviti BP. Ova naredbena datoteka može samo staviti informacije u Vašu BP koje mora biti aktivna to jest raditi. ');
+ define('_CONTINUE_1','Postavke Vaše Baze Podataka');
+ define('_CONTINUE_2','Vi sada možete definirati Vaš raèu admin. Ako vi skoèite ovu etapu, Vaš raèu admin æ biti Admin/ (pažnja sa velikom i malim slovima) to jest nema lozinke. Bilo bi bolje da definirate sada a ne poslje.');
+diff -ur PostNuke-0.762/html/install/lang/ita/global.php PostNuke-0.762.config/html/install/lang/ita/global.php
+--- PostNuke-0.762/html/install/lang/ita/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/ita/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -64,8 +64,8 @@
+ define('_CHMOD_CHECK_2','Controllo sui permessi di lettura e scrittura (CHMOD) sui files.<BR>Con permessi non corretti, lo script potrebbe non criptare i dati nel file config.php [una sicurezza in più gestita dallo script].<br>Inoltre non sarà possibile modificare le preferenze dal pannello di controllo.');
+ define('_CHMOD_CHECK_3','Permessi [CHMOD] per config.php: 666 -- corretto, lo script può scrivere sul file');
+ define('_CHMOD_CHECK_4','Impostare i permessi [CHMOD] per config.php a 666 in modo che lo script possa scrivere e criptare i dati nel db');
+-define('_CHMOD_CHECK_5','Permessi [CHMOD] per config-old.php: 666 -- corretto, lo script può scrivere sul file');
+-define('_CHMOD_CHECK_6','Impostare i permessi [CHMOD] per config-old.php a 666 in modo che lo script possa scrivere e criptare i dati nel db');
++define('_CHMOD_CHECK_5','Permessi [CHMOD] per /etc/webapps/postnuke/config.php.bak: 666 -- corretto, lo script può scrivere sul file');
++define('_CHMOD_CHECK_6','Impostare i permessi [CHMOD] per /etc/webapps/postnuke/config.php.bak a 666 in modo che lo script possa scrivere e criptare i dati nel db');
+ define('_CHM_CHECK_1', 'Inserisci le informazioni sul database.<br>Se non hai accesso al sistema come "root" il database deve essere creato prima di proseguire. Una verifica veloce: se non sei in grado di creare nuovi database con phpMyAdmin (a causa di virtual hosting o sicurezza mySQL), anche lo script non potrà farlo. Lo script potrà comunque "intavolare" il database e inserire gli altri dati necessari all\'installazione.');
+ define('_CONTINUE_1','Configuriamo le impostazioni del DB');
+ define('_CONTINUE_2','Impostazione dell\'account da amministratore. In mancanza di configurazione, il Login per l\'amministratore sarà Admin / Password (attenzine alle maiuscole). Si consiglia di impostare tale dati.');
+diff -ur PostNuke-0.762/html/install/lang/pol/global.php PostNuke-0.762.config/html/install/lang/pol/global.php
+--- PostNuke-0.762/html/install/lang/pol/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/pol/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -51,8 +51,8 @@
+ define('_CHMOD_CHECK_2','Na pocz±tku zostan± sprawdzone prawa dostêpu do plików, aby skrypt móg³ zapisywaæ w nich dane. Je¶li prawa nie bêd± poprawne, skrypt nie bêdzie w stanie zapisaæ ustawieñ w pliku konfiguracyjnym. Skrypt koduje informacje o bazie danych w pliku konfiguracyjnym, co zapewnia wiêksze bezpieczeñstwo. Nie bêdziesz równie¿ mieæ mo¿liwo¶ci zmiany swoich ustawieñ z Panelu administracyjnego, gdy ju¿ uruchomisz PostNuke`a.');
+ define('_CHMOD_CHECK_3','Prawa dostêpu do pliku config.php ustawione na 666 -> prawid³owo, skrypt zapisywaæ do pliku.');
+ define('_CHMOD_CHECK_4','Zmieñ prawa dostêpu do pliku config.php na 666, tak aby skrypt móg³ go modyfikowaæ i zapisaæ zakodowane ustawienia bazy (Podpowied¼: u¿yj "chmod").');
+-define('_CHMOD_CHECK_5','Prawa dostêpu do pliku config-old.php ustawione na 666 -> prawid³owo, skrypt zapisywaæ do pliku.');
+-define('_CHMOD_CHECK_6','Zmieñ prawa dostêpu do pliku config-old.php na 666, tak aby skrypt móg³ go modyfikowaæ i zapisaæ zakodowane ustawienia bazy (Podpowied¼: u¿yj "chmod").');
++define('_CHMOD_CHECK_5','Prawa dostêpu do pliku /etc/webapps/postnuke/config.php.bak ustawione na 666 -> prawid³owo, skrypt zapisywaæ do pliku.');
++define('_CHMOD_CHECK_6','Zmieñ prawa dostêpu do pliku /etc/webapps/postnuke/config.php.bak na 666, tak aby skrypt móg³ go modyfikowaæ i zapisaæ zakodowane ustawienia bazy (Podpowied¼: u¿yj "chmod").');
+ define('_CHM_CHECK_1','Wprowad¼ informacje o bazie danych. Je¶li nie masz dostêpu do swojej bazy jako u¿ytkownik <i>root</i> (wirtualny hosting, itp.), bêdziesz musia³(a) samodzielnie utworzyæ bazê zanim przejdziesz dalej. Regu³a jest nastêpuj±ca: je¶li nie mo¿esz utworzyæ bazy np. za pomoc± phpMyAdmin z powodu wirtualnego hostingu lub zabezpieczeñ w MySQL`u, wówczas ten skrypt równie¿ nie bêdzie w stanie stworzyæ dla Ciebie bazy. Bêdzie trzeba przeprowadziæ instalacjê ponownie, aby uzupe³niæ bazê o niezbêdne tabele i dane.<br><br>Je¿eli nie posiadasz informacji do okre¶lenia hosta bazy danych, nazwy u¿ytkownika lub has³a, pozostaw warto¶ci domy¶lne.<br><br><b>ZAUWA¯: niektóre hosty u¿ywaj± 127.0.0.1 (localhost) jako hosta bazy danych. Je¶li pojawi siê b³±d "unable connect to MYSQL socket", zmieñ nazwe hosta na 127.0.0.1.</b><br><br>Je¿eli to nie zadzia³a, skontaktuj siê z firm± hostingow±, która powinna dostarczyæ Ci wymaganych danych.');
+ define('_CONTINUE_1','Ustawianie bazy danych');
+ define('_CONTINUE_2','Teraz mo¿esz ustawiæ konto administratora. Je¿eli ominiesz ten krok, administrator otrzyma nazwê <i>Admin</i> i has³o <i>Password</i> (uwzglêdniaj±c wielko¶æ znaków). Wskazane jest, aby krok instalacji konta administratora wykonaæ teraz.');
+diff -ur PostNuke-0.762/html/install/lang/spa/global.php PostNuke-0.762.config/html/install/lang/spa/global.php
+--- PostNuke-0.762/html/install/lang/spa/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/spa/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -260,11 +260,11 @@
+ define('_BTN_UPGRADE','Actualización');
+ define("_CHANGE_INFO_1","Por favor, corrija la información que ha introducido  para poder acceder a su base de datos.");
+ define("_CHMOD_CHECK_1","Comprobación de Permisos CHMOD");
+-define("_CHMOD_CHECK_2","Lo primero que haremos es comprobar que los permisos actuales son correctos para que el programa de instalación pueda escribir en el archivo correspondiente. Si la configuración no es correcta, el programa de instalación no será capaz de «encriptar» tu información en el archivo 'config.php' y 'config-old.php'. Encriptar los datos de la conexión a la base de datos es útil para añadir seguridad a tu sitio web. Recuerda que puedes actualizar tus datos desde la Administración una vez que el sitio web esté funcionando.");
++define("_CHMOD_CHECK_2","Lo primero que haremos es comprobar que los permisos actuales son correctos para que el programa de instalación pueda escribir en el archivo correspondiente. Si la configuración no es correcta, el programa de instalación no será capaz de «encriptar» tu información en el archivo 'config.php' y '/etc/webapps/postnuke/config.php.bak'. Encriptar los datos de la conexión a la base de datos es útil para añadir seguridad a tu sitio web. Recuerda que puedes actualizar tus datos desde la Administración una vez que el sitio web esté funcionando.");
+ define("_CHMOD_CHECK_3","La configuración de permisos para el archivo config.php es 666 -- correcto, este script puede escribir en el fichero");
+ define("_CHMOD_CHECK_4","Por favor, cambie los permisos de el archivo config.php a 666 para que este script pueda escribir y encriptar los datos de la BD (Este cambio lo puede hacer con la orden «chmod 666 config.php»)");
+-define("_CHMOD_CHECK_5","La configuración de permisos para el archivo config-old.php es 666 -- correcto, este script puede escribir en el fichero");
+-define("_CHMOD_CHECK_6","Por favor, configure los permisos para el archivo config-old.php a 666 para que este script pueda escribir y encriptar los datos de la BD (Este cambio lo puede hacer con la orden «chmod 666 config-old.php)");
++define("_CHMOD_CHECK_5","La configuración de permisos para el archivo /etc/webapps/postnuke/config.php.bak es 666 -- correcto, este script puede escribir en el fichero");
++define("_CHMOD_CHECK_6","Por favor, configure los permisos para el archivo /etc/webapps/postnuke/config.php.bak a 666 para que este script pueda escribir y encriptar los datos de la BD (Este cambio lo puede hacer con la orden «chmod 666 /etc/webapps/postnuke/config.php.bak)");
+ define("_CHM_CHECK_1", "<br /><br />En el caso de que usted no sea el Administrador de su Base de Datos o en el caso de que el Administrador de su Base de Datos no le haya concedido los permisos adecuados para poder crear sus propias Bases de Datos, este script no podrá crear la Base de Datos para PostNuke y necesitará que haya sido creada previamente para poder proseguir con el resto de la instalación.");
+ define("_CONTINUE_1","Configuración de las Preferencias de su Base de Datos");
+ define("_CONTINUE_2","<br />Ahora puedes configurar tu cuenta de Administrador. Si decides saltarte este paso de la configuración, tu login para tu cuenta de administrador será <b>Admin</b> y la contraseña <b>Password</b> (fijate en el uso de mayúsculas y minúsculas). <b>Lo aconsejable es que lo configures ahora y no esperes a más tarde.</b>");
+diff -ur PostNuke-0.762/html/install/lang/x_brazilian_portuguese/global.php PostNuke-0.762.config/html/install/lang/x_brazilian_portuguese/global.php
+--- PostNuke-0.762/html/install/lang/x_brazilian_portuguese/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/x_brazilian_portuguese/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -51,8 +51,8 @@
+ define('_CHMOD_CHECK_2','Primeiro precisamos verificar se os seus valores CHMOD esto corretos para que o script possa modificar os arquivos necessrios.  Se os valores no estiverem corretos, este script no poder criptografar os seus dados no seu arquivo de configurao.  Criptografia de dados SQL  uma adio de segurana efetuada por este script. Voc no poder atualizar as suas preferncias de administrador uma vez que o seu site esteja instalado.');
+ define('_CHMOD_CHECK_3','Valor CHMOD para o config.php  666 -- correto, o script tem acesso de modificao ao arquivo');
+ define('_CHMOD_CHECK_4','Por favor, atribua o valor CHMOD 666 ao config.php para que o script possa modificar e criptografar o banco de dados');
+-define('_CHMOD_CHECK_5','Valor CHMOD para o config-old.php  666 -- correto, o script tem acesso de modificao ao arquivo');
+-define('_CHMOD_CHECK_6','Por favor, atribua o valor CHMOD 666 ao config-old.php para que o script possa modificar e criptografar o banco de dados');
++define('_CHMOD_CHECK_5','Valor CHMOD para o /etc/webapps/postnuke/config.php.bak  666 -- correto, o script tem acesso de modificao ao arquivo');
++define('_CHMOD_CHECK_6','Por favor, atribua o valor CHMOD 666 ao /etc/webapps/postnuke/config.php.bak para que o script possa modificar e criptografar o banco de dados');
+ define('_CHM_CHECK_1','Por favor, insira as informaes do seu banco de dados.  Se voc no tem acesso \'root\' ao seu banco de dados (hospedagem compartilhada etc), voc deve informar o banco de dados existente. Como regra bsica, se voc no pode criar um banco de dados utilizando o phpMyAdmin pelo fato de estar utilizando hosting virtual, ou por motivos de segurana do mySQL, ento este script no poder criar o banco de dados para voc.  No entanto, este script ainda precisa ser executado para preencher um banco de dados existente.');
+ define('_CONTINUE_1','Definindo suas preferncias do banco de dados');
+ define('_CONTINUE_2','Voc agora pode configurar uma conta administrativa. Se voc pular esta parte da configurao, o seu login para a conta administrativa ser Admin / Password (respeite maiscula e minsculas).   recomendvel que voc configure a conta administrativa agora e no espere para mais tarde.');
+diff -ur PostNuke-0.762/html/install/lang/zho/global.php PostNuke-0.762.config/html/install/lang/zho/global.php
+--- PostNuke-0.762/html/install/lang/zho/global.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/lang/zho/global.php	2006-03-10 01:11:34.000000000 +0200
+@@ -30,8 +30,8 @@
+ define('_CHMOD_CHECK_2','ÎÒÃÇ½«Ê×ÏÈ¼ì²éÄúµÄCHMODÉèÖÃÊÇ·ñÕýÈ·£¬ÒÔ±ã°²×°³ÌÐòÄÜ¹»×Ô¶¯¸üÐÂÅäÖÃÎÄ¼þ¡£Èç¹ûÄúµÄÉèÖÃ²»ÕýÈ·£¬°²×°³ÌÐò¾Í²»ÄÜÔÚÅäÖÃÎÄ¼þÖÐ¼ÓÃÜÄúµÄÊý¾Ý¿âÐÅÏ¢¡£¼ÓÃÜÊý¾Ý¿âÐÅÏ¢Ê¹µÃÊý¾Ý¸ü¼Ó°²È«£¬µ«ÕâÖ»ÄÜÓÉ°²×°³ÌÐòÍê³É¡£Ò»µ©ÄúµÄÍøÕ¾ÕýÊ½ÔËÐÐ£¬ÄúÒ²²»ÄÜ´Ó¹ÜÀíÃæ°åÐÞ¸ÄÊý¾Ý¿â²ÎÊý¡£');
+ define('_CHMOD_CHECK_3','config.php µÄ CHMOD ÉèÖÃÎª 666 -- ÕýÈ·£¬°²×°³ÌÐò¿ÉÒÔÐ´ÈëÎÄ¼þ');
+ define('_CHMOD_CHECK_4','<font color="red">ÇëÉèÖÃ config.php µÄ CHMOD Îª 666 ÒÔ±ã°²×°³ÌÐòÄÜ¹»Ð´Èë¼ÓÃÜµÄÊý¾Ý¿âÐÅÏ¢</font>');
+-define('_CHMOD_CHECK_5','config-old.php µÄ CHMOD ÉèÖÃÎª 666 -- ÕýÈ·£¬°²×°³ÌÐò¿ÉÒÔÐ´ÈëÎÄ¼þ');
+-define('_CHMOD_CHECK_6','<font color="red">ÇëÉèÖÃ config-old.php µÄ CHMOD Îª 666 ÒÔ±ã°²×°³ÌÐòÄÜ¹»Ð´Èë¼ÓÃÜµÄÊý¾Ý¿âÐÅÏ¢</font>');
++define('_CHMOD_CHECK_5','/etc/webapps/postnuke/config.php.bak µÄ CHMOD ÉèÖÃÎª 666 -- ÕýÈ·£¬°²×°³ÌÐò¿ÉÒÔÐ´ÈëÎÄ¼þ');
++define('_CHMOD_CHECK_6','<font color="red">ÇëÉèÖÃ /etc/webapps/postnuke/config.php.bak µÄ CHMOD Îª 666 ÒÔ±ã°²×°³ÌÐòÄÜ¹»Ð´Èë¼ÓÃÜµÄÊý¾Ý¿âÐÅÏ¢</font>');
+ define('_CHM_CHECK_1', 'ÇëÊäÈëÄúµÄÊý¾Ý¿âÐÅÏ¢¡£Èç¹ûÄúÃ»ÓÐÄúÊý¾Ý¿âµÄrootÈ¨ÏÞ(±ÈÈçÄúÊ¹ÓÃµÄÊÇÐéÄâÖ÷»ú)£¬ÄúÐèÒªÔÚ½øÈëÏÂÒ»²½Ö®Ç°´´½¨ºÃÄúµÄÊý¾Ý¿â¡£Ò»¸öºÜºÃµÄÅÐ¶Ï·½·¨ÊÇ£¬Èç¹ûÄúÓÉÓÚÊ¹ÓÃÐéÄâÖ÷»ú»òÊÇMySQLµÄ°²È«ÎÊÌâ²»ÄÜÍ¨¹ýphpMyAdmin´´½¨Êý¾Ý¿â£¬±¾°²×°³ÌÐòÒ²²»ÄÜÎªÄú×Ô¶¯´´½¨Êý¾Ý¿â¡£µ«ÊÇ°²×°³ÌÐòÒÀ¾É¿ÉÒÔÏòÊý¾Ý¿âÖÐÊäÈëÊý¾Ý¡£ËüÈÔÈ»ÐèÒª±»ÔËÐÐ¡£');
+ define('_CONTINUE_1','ÉèÖÃÄúµÄÊý¾Ý¿â²ÎÊý');
+ define('_CONTINUE_2','ÄúÏÖÔÚ¿ÉÒÔÉèÖÃÄúµÄ¹ÜÀíÔ±ÕÊºÅ¡£Èç¹ûÄúÌø¹ýÁË¸Ã²½Öè£¬ÄúµÄ¹ÜÀíÔ±µÇÂ¼ÕÊºÅºÍÃÜÂë·Ö±ðÎª Admin ºÍ [¿ÕÃÜÂë] (´óÐ¡Ð´Ãô¸Ð)¡£½¨ÒéÄúÔÚ°²×°Ê±¾ÍÉèÖÃºÃ£¬¶ø²»ÊÇµÈµ½°²×°Íê³ÉºóÔÙÉèÖÃ¡£');
+diff -ur PostNuke-0.762/html/install/modify_config.php PostNuke-0.762.config/html/install/modify_config.php
+--- PostNuke-0.762/html/install/modify_config.php	2006-03-10 01:12:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/modify_config.php	2006-03-10 01:11:34.000000000 +0200
+@@ -144,7 +144,7 @@
+         add_src_rep("adminmail", $email);
+     }
+ 
+-    $ret = modify_file("config.php", "config-old.php", $reg_src, $reg_rep);
++    $ret = modify_file("config.php", "/etc/webapps/postnuke/config.php.bak", $reg_src, $reg_rep);
+ 
+     if (preg_match("/Error/", $ret)) {
+         show_error_info();
