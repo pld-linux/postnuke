@@ -38,8 +38,8 @@ diff -u PostNuke-0.762.config/html/install/modify_config.php PostNuke-0.762.conf
          add_src_rep("adminmail", $email);
      }
  
--    $ret = modify_file("/etc/webapps/postnuke/config.php", "config-old.php", $reg_src, $reg_rep);
-+    $ret = modify_file("config.php", "/etc/webapps/postnuke/config.php.bak", $reg_src, $reg_rep);
+-    $ret = modify_file("config.php", "config-old.php", $reg_src, $reg_rep);
++    $ret = modify_file("/etc/webapps/postnuke/config.php", "/etc/webapps/postnuke/config.php.bak", $reg_src, $reg_rep);
  
      if (preg_match("/Error/", $ret)) {
          show_error_info();
@@ -91,8 +91,8 @@ diff -u PostNuke-0.762.config/html/modules/Admin/pnadmin.php PostNuke-0.762.conf
      $pnRender->assign('register_globals', $register_globals);
  
      // check for config.php beeing writable
--    $config_php = (bool) is_writable('/etc/webapps/postnuke/config.php');
-+    $config_php = (bool) is_writable('config.php');
+-    $config_php = (bool) is_writable('config.php');
++    $config_php = (bool) is_writable('/etc/webapps/postnuke/config.php');
      $pnRender->assign('config_php', $config_php);
  
 -    // check for config-old.php beeing writable
