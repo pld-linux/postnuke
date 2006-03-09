@@ -1,0 +1,92 @@
+diff -ur PostNuke-0.762/html/includes/pnRender.class.php PostNuke-0.762.smarty/html/includes/pnRender.class.php
+--- PostNuke-0.762/html/includes/pnRender.class.php	2006-03-10 01:48:32.000000000 +0200
++++ PostNuke-0.762.smarty/html/includes/pnRender.class.php	2006-03-10 01:48:11.000000000 +0200
+@@ -32,8 +32,7 @@
+ 	/**
+ 	 * The directory of Smarty
+ 	 */
+-    define('SMARTY_DIR', 'includes/classes/Smarty/');
+-    require_once (SMARTY_DIR . 'Smarty.class.php');
++    require_once '/usr/share/php/Smarty/Smarty.class.php';
+ }
+ 
+ /**
+@@ -540,4 +539,4 @@
+     return $content;
+ }
+ 
+-?>
+\ No newline at end of file
++?>
+diff -ur PostNuke-0.762/html/modules/Xanthia/pnadmin.php PostNuke-0.762.smarty/html/modules/Xanthia/pnadmin.php
+--- PostNuke-0.762/html/modules/Xanthia/pnadmin.php	2006-03-10 01:48:26.000000000 +0200
++++ PostNuke-0.762.smarty/html/modules/Xanthia/pnadmin.php	2006-03-10 01:47:18.000000000 +0200
+@@ -3271,7 +3271,7 @@
+ 	
+ 	if (!class_exists('Smarty')) {
+ 	    
+-	    include_once 'includes/classes/Smarty/Smarty.class.php';
++	    include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 	    
+ 	    $vardisplay = new Smarty;
+ 	    $vardisplay->compile_check	= false;                      // check for updated templates?
+@@ -3452,7 +3452,7 @@
+         pnSessionSetVar('statusmsg', 'Template Updated');
+         
+ 		if (!class_exists('Smarty')){
+-			include_once 'includes/classes/Smarty/Smarty.class.php';
++			include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 		}
+ 		
+ 		$skinName = pnModAPIFunc('Xanthia','user','getSkinFromID',
+@@ -3506,7 +3506,7 @@
+ 		pnSessionSetVar('statusmsg', 'Template Updated');
+ 		
+ 		if (!class_exists('Smarty')) {
+-			include_once 'includes/classes/Smarty/Smarty.class.php';
++			include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 		}
+     
+ 		$thisfile = "$newtheme/$sourceTpl";								
+@@ -4076,7 +4076,7 @@
+ 	$cid = pnModAPIFunc('Xanthia','admin','insertThemeDB', array('id' => $skin)); // sucessful install
+ 	if ($cid != false) {
+ 		if (!class_exists('Smarty')){
+-			include_once 'includes/classes/Smarty/Smarty.class.php';
++			include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 		}
+ 							
+ 		$DelteDTS =& new Smarty;
+@@ -4162,7 +4162,7 @@
+        		
+         
+ 		if (!class_exists('Smarty')){
+-			include_once 'includes/classes/Smarty/Smarty.class.php';
++			include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 		}
+ 		
+ 		$thisfile = "$skinName/$tpl_file";						
+diff -ur PostNuke-0.762/html/modules/Xanthia/pnadminapi.php PostNuke-0.762.smarty/html/modules/Xanthia/pnadminapi.php
+--- PostNuke-0.762/html/modules/Xanthia/pnadminapi.php	2006-03-10 01:48:26.000000000 +0200
++++ PostNuke-0.762.smarty/html/modules/Xanthia/pnadminapi.php	2006-03-10 01:47:18.000000000 +0200
+@@ -2678,7 +2678,7 @@
+ 	pnModDelVar('Xanthia', $skinName.'themecache');
+ 	
+ 	if (!class_exists('Smarty')){
+-		include_once 'includes/classes/Smarty/Smarty.class.php';
++		include_once '/usr/share/php/Smarty/Smarty.class.php';
+ 	}
+ 	
+ 	$DelteDTS =& new Smarty;
+diff -ur PostNuke-0.762/html/modules/Xanthia/pnuserapi.php PostNuke-0.762.smarty/html/modules/Xanthia/pnuserapi.php
+--- PostNuke-0.762/html/modules/Xanthia/pnuserapi.php	2006-03-10 01:48:26.000000000 +0200
++++ PostNuke-0.762.smarty/html/modules/Xanthia/pnuserapi.php	2006-03-10 01:47:17.000000000 +0200
+@@ -106,7 +106,7 @@
+ 
+         if (!empty($xantinfo)) {
+             // Load the DTS (Smarty) Class
+-            include_once('includes/classes/Smarty/Smarty.class.php');
++            include_once('/usr/share/php/Smarty/Smarty.class.php');
+         } else {
+             // No Xanthia module info
+             pnSessionSetVar('errormsg', pnVarPrepHTMLDisplay(_XA_APILOADFAILED));
