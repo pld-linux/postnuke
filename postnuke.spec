@@ -78,7 +78,6 @@ Pakiet potrzebny do zainstalowania postnuke.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{nukeroot}
 
-cp -ar html/*/		$RPM_BUILD_ROOT%{nukeroot}
 cp -ar html/*		$RPM_BUILD_ROOT%{nukeroot}
 
 %clean
