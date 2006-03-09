@@ -91,8 +91,9 @@ echo "Remember to uninstall %{name}-install after initiation of %{name}!!"
 %doc phoenix-sql/*
 %dir %{nukeroot}
 %attr(640,http,http) %config(noreplace) %{nukeroot}/config*.php
+%dir %{nukeroot}/pnTemp
 %attr(755,http,http) %{nukeroot}/pnTemp/*
-%{nukeroot}/[^ci,^cp]*
+%{nukeroot}/[!ip]*
 %{nukeroot}/images
 %{nukeroot}/includes
 %{nukeroot}/index.php
