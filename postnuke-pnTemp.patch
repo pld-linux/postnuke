@@ -1,0 +1,192 @@
+diff -ur PostNuke-0.762/html/config.php PostNuke-0.762.pntemp/html/config.php
+--- PostNuke-0.762/html/config.php	2005-04-18 23:03:23.000000000 +0300
++++ PostNuke-0.762.pntemp/html/config.php	2006-03-10 00:05:17.000000000 +0200
+@@ -56,7 +56,7 @@
+ $pnconfig['prefix'] = 'pn';
+ $pnconfig['encoded'] = '1';
+ $pnconfig['pconnect'] = '0';
+-$pnconfig['temp'] = 'pnTemp';
++$pnconfig['temp'] = '/var/lib/postnuke/pnTemp';
+ 
+ 
+ // ----------------------------------------------------------------------
+diff -ur PostNuke-0.762/html/docs/manual.txt PostNuke-0.762.pntemp/html/docs/manual.txt
+--- PostNuke-0.762/html/docs/manual.txt	2005-09-28 09:38:29.000000000 +0300
++++ PostNuke-0.762.pntemp/html/docs/manual.txt	2006-03-10 00:05:17.000000000 +0200
+@@ -23,7 +23,7 @@
+ site into a simple set of steps. 
+ 
+ Before running the installer, ensure that both config.php and config-old.php
+-are world-writable. Furthermore, make sure that the pnTemp directory and its subdirectories 
++are world-writable. Furthermore, make sure that the /var/lib/postnuke/pnTemp directory and its subdirectories 
+ are also world-writable. "World-writable" means applying a permission setting of 777 or 666, 
+ depending on your system, if the system is Unix-based.
+ 
+@@ -112,7 +112,7 @@
+ you'll need it in step 7.
+ 
+ 5) If you're upgrading from an earlier release containing the Xanthia and pnRender 
+-modules, ensure that all cache and compile directories in pnTemp are emptied.
++modules, ensure that all cache and compile directories in /var/lib/postnuke/pnTemp are emptied.
+ 
+ 6) If you haven't already done so, BACKUP your old files and database to a 
+ secure location. Remove ALL of the files in your existing PostNuke distribution.  
+@@ -136,7 +136,7 @@
+ 
+ $pnconfig['dbtabletype'] = 'MyISAM';
+ $pnconfig['pconnect'] = '0';
+-$pnconfig['temp'] = 'pnTemp';
++$pnconfig['temp'] = '/var/lib/postnuke/pnTemp';
+ 
+ Now, add the following entry, just below $pndebug['debug_sql'] = 0;
+ 
+diff -ur PostNuke-0.762/html/install/check.php PostNuke-0.762.pntemp/html/install/check.php
+--- PostNuke-0.762/html/install/check.php	2005-07-28 12:09:33.000000000 +0300
++++ PostNuke-0.762.pntemp/html/install/check.php	2006-03-10 00:05:17.000000000 +0200
+@@ -75,7 +75,7 @@
+         $chmod = 1;
+     } 
+ 
+-	$dir = "pnTemp/pnRender_compiled";
++	$dir = "/var/lib/postnuke/pnTemp/pnRender_compiled";
+     if (is_writable($dir)) {
+         echo "<p><img src='install/style/green_check.gif'  alt='' border='0' align='absmiddle'><font class=\"pn-title\">$dir -- " . _PNTEMP_DIRWRITABLE . "</font></p>";
+     } else {
+@@ -83,7 +83,7 @@
+         $chmod = 1;
+ 	}
+ 
+-	$dir = "pnTemp/pnRender_cache";
++	$dir = "/var/lib/postnuke/pnTemp/pnRender_cache";
+     if (is_writable($dir)) {
+         echo "<p><img src='install/style/green_check.gif'  alt='' border='0' align='absmiddle'><font class=\"pn-title\">$dir -- " . _PNTEMP_DIRWRITABLE . "</font></p>";
+     } else {
+@@ -91,7 +91,7 @@
+         $chmod = 1;
+ 	}
+ 
+-	$dir = "pnTemp/Xanthia_compiled";
++	$dir = "/var/lib/postnuke/pnTemp/Xanthia_compiled";
+     if (is_writable($dir)) {
+         echo "<p><img src='install/style/green_check.gif'  alt='' border='0' align='absmiddle'><font class=\"pn-title\">$dir -- " . _PNTEMP_DIRWRITABLE . "</font></p>";
+     } else {
+@@ -99,7 +99,7 @@
+         $chmod = 1;
+ 	}
+ 
+-	$dir = "pnTemp/Xanthia_cache";
++	$dir = "/var/lib/postnuke/pnTemp/Xanthia_cache";
+     if (is_writable($dir)) {
+         echo "<p><img src='install/style/green_check.gif'  alt='' border='0' align='absmiddle'><font class=\"pn-title\">$dir -- " . _PNTEMP_DIRWRITABLE . "</font></p>";
+     } else {
+@@ -107,7 +107,7 @@
+         $chmod = 1;
+ 	}
+ 
+-	$dir = "pnTemp/Xanthia_Config";
++	$dir = "/var/lib/postnuke/pnTemp/Xanthia_Config";
+     if (is_writable($dir)) {
+         echo "<p><img src='install/style/green_check.gif'  alt='' border='0' align='absmiddle'><font class=\"pn-title\">$dir -- " . _PNTEMP_DIRWRITABLE . "</font></p>
+              <p><form action=\"install.php\" method=\"post\">
+diff -ur PostNuke-0.762/html/modules/Admin/pnadmin.php PostNuke-0.762.pntemp/html/modules/Admin/pnadmin.php
+--- PostNuke-0.762/html/modules/Admin/pnadmin.php	2006-01-12 14:12:57.000000000 +0200
++++ PostNuke-0.762.pntemp/html/modules/Admin/pnadmin.php	2006-03-10 00:05:17.000000000 +0200
+@@ -952,11 +952,11 @@
+     $config_old_php = (bool) is_writable('config-old.php');
+     $pnRender->assign('config_old_php', $config_old_php);
+ 
+-    // check for .htaccess in /pnTemp
++    // check for .htaccess in /var/lib/postnuke/pnTemp
+     global $pnconfig;
+-    if ($pnconfig['temp'] == 'pnTemp') {
++    if ($pnconfig['temp'] == '/var/lib/postnuke/pnTemp') {
+           // default installation, check for .htaccess
+-        $pntemp_htaccess = (bool) file_exists('pnTemp/.htaccess');
++        $pntemp_htaccess = (bool) file_exists('/var/lib/postnuke/pnTemp/.htaccess');
+     } else {
+           // already customized, admin should know about what he's doing...
+           $pntemp_htaccess = true;
+diff -ur PostNuke-0.762/html/modules/Admin/pnlang/eng/admin.php PostNuke-0.762.pntemp/html/modules/Admin/pnlang/eng/admin.php
+--- PostNuke-0.762/html/modules/Admin/pnlang/eng/admin.php	2006-02-02 12:16:15.000000000 +0200
++++ PostNuke-0.762.pntemp/html/modules/Admin/pnlang/eng/admin.php	2006-03-10 00:05:17.000000000 +0200
+@@ -38,7 +38,7 @@
+ define('_ADMIN_REGISTER_GLOBALS','Notice: <a href="http://php.net/register_globals">register_globals</a> is on!');
+ define('_ADMIN_CONFIG_PHP','Notice: config.php is writable (hint: chmod 644 or chmod 444)!');
+ define('_ADMIN_CONFIG_OLD_PHP','Notice: config-old.php is writable (hint: chmod 644 or chmod 444)!');
+-define('_ADMIN_PNTEMP_HTACCESS','Notice: /pnTemp-folder should be secured with .htaccess.');
++define('_ADMIN_PNTEMP_HTACCESS','Notice: /var/lib/postnuke/pnTemp-folder should be secured with .htaccess.');
+ define('_ADMINCONTINUE','Continue');
+ define('_ADMININSTALLWARNING','Warning! Please remove the file  install.php and the folder called install from the root of your PostNuke web site before proceeding');
+ define('_ADMINPSAKWARNING', 'Warning! Please remove the Swiss army knife tool from the root of your PostNuke web site before proceeding');
+diff -ur PostNuke-0.762/html/modules/Admin/pnlang/pol/admin.php PostNuke-0.762.pntemp/html/modules/Admin/pnlang/pol/admin.php
+--- PostNuke-0.762/html/modules/Admin/pnlang/pol/admin.php	2005-08-13 12:03:00.000000000 +0300
++++ PostNuke-0.762.pntemp/html/modules/Admin/pnlang/pol/admin.php	2006-03-10 00:05:17.000000000 +0200
+@@ -38,7 +38,7 @@
+ define('_ADMIN_REGISTER_GLOBALS','Uwaga: <a href="http://pl.php.net/register_globals">register_globals</a> w³±czone!');
+ define('_ADMIN_CONFIG_PHP','Uwaga: config.php jest zapisywalny (ustaw: chmod 644)!');
+ define('_ADMIN_CONFIG_OLD_PHP','Uwaga: config-old.php jest zapisywalny (ustaw: chmod 644)!');
+-define('_ADMIN_PNTEMP_HTACCESS','Uwaga: folder /pnTemp powinien byæ zabezpieczony za pomoc± .htaccess.');
++define('_ADMIN_PNTEMP_HTACCESS','Uwaga: folder /var/lib/postnuke/pnTemp powinien byæ zabezpieczony za pomoc± .htaccess.');
+ define('_ADMINCONTINUE','Kontynuuj');
+ define('_ADMININSTALLWARNING','Ostrze¿enie! Proszê usun±æ plik `install.php` oraz folder `install` z g³ównego katalogu PostNuke!');
+ define('_ADMINPSAKWARNING', 'Uwaga! Usunæ narzêdzie "Swiss army knife" z katalogu g³ównego PostNuke');
+diff -ur PostNuke-0.762/html/modules/RSS/pnlang/eng/admin.php PostNuke-0.762.pntemp/html/modules/RSS/pnlang/eng/admin.php
+--- PostNuke-0.762/html/modules/RSS/pnlang/eng/admin.php	2005-08-21 14:01:23.000000000 +0300
++++ PostNuke-0.762.pntemp/html/modules/RSS/pnlang/eng/admin.php	2006-03-10 00:05:17.000000000 +0200
+@@ -50,6 +50,6 @@
+ define('_RSSUPDATECONFIG', 'Update RSS config');
+ define('_RSSLINKSOPENINNEWWINDOW', 'Open links in new browser window');
+ define('_RSSCACHEINTERVAL', 'Cache interval for feeds');
+-define('_RSSCACHEDIRECTORY', 'Cache directory for feeds (relative to pnTemp)');
++define('_RSSCACHEDIRECTORY', 'Cache directory for feeds (relative to /var/lib/postnuke/pnTemp)');
+ 
+ ?>
+\ No newline at end of file
+diff -ur PostNuke-0.762/html/modules/RSS/pnlang/pol/admin.php PostNuke-0.762.pntemp/html/modules/RSS/pnlang/pol/admin.php
+--- PostNuke-0.762/html/modules/RSS/pnlang/pol/admin.php	2005-08-14 00:10:00.000000000 +0300
++++ PostNuke-0.762.pntemp/html/modules/RSS/pnlang/pol/admin.php	2006-03-10 00:05:17.000000000 +0200
+@@ -51,7 +51,7 @@
+ define('_RSSUPDATECONFIG', 'Aktualizuj konfiguracjê RSS');
+ define('_RSSLINKSOPENINNEWWINDOW', 'Linki otwieraj w nowym oknie');
+ define('_RSSCACHEINTERVAL', 'Czas buforowania wiadomo¶ci');
+-define('_RSSCACHEDIRECTORY', 'Katalog bufora dla wiadomo¶ci (wzglêdem pnTemp)');
++define('_RSSCACHEDIRECTORY', 'Katalog bufora dla wiadomo¶ci (wzglêdem /var/lib/postnuke/pnTemp)');
+ define('_RSSINVALIDPROTOCOL', 'Nieprawid³owy protokó³. Tylko http i https s± dozwolone.');
+ define('_RSSURLTOOLONG', 'Podany URL jest za d³ugi (max 200 znaków).');
+ 
+diff -ur PostNuke-0.762/html/modules/pnRender/pninit.php PostNuke-0.762.pntemp/html/modules/pnRender/pninit.php
+--- PostNuke-0.762/html/modules/pnRender/pninit.php	2004-06-30 17:27:27.000000000 +0300
++++ PostNuke-0.762.pntemp/html/modules/pnRender/pninit.php	2006-03-10 00:05:17.000000000 +0200
+@@ -53,7 +53,7 @@
+ 	// this will be deleted in future versions
+ 	// as it will be done by the PostNuke install
+ 	/*include_once 'install/pntemp.php';
+-	if (!pntemp_install('pnTemp')) {
++	if (!pntemp_install('/var/lib/postnuke/pnTemp')) {
+ 	    return false;
+ 	}*/
+ 
+diff -ur PostNuke-0.762/html/pnTemp/.htaccess PostNuke-0.762.pntemp/html/pnTemp/.htaccess
+--- PostNuke-0.762/html/pnTemp/.htaccess	2004-06-29 07:07:40.000000000 +0300
++++ PostNuke-0.762.pntemp/html/pnTemp/.htaccess	2006-03-10 00:05:17.000000000 +0200
+@@ -1,7 +1,7 @@
+ # File: $Id$
+ # ----------------------------------------------------------------------
+ # Purpose of file: block any web access to files stored under
+-#                  the pnTemp directory
++#                  the /var/lib/postnuke/pnTemp directory
+ # ----------------------------------------------------------------------
+ SetEnvIf Request_URI "\.css$" object_is_css=css
+ SetEnvIf Request_URI "\.js$" object_is_js=js
+diff -ur PostNuke-0.762/html/upgrade.php PostNuke-0.762.pntemp/html/upgrade.php
+--- PostNuke-0.762/html/upgrade.php	2005-09-26 23:42:35.000000000 +0300
++++ PostNuke-0.762.pntemp/html/upgrade.php	2006-03-10 00:05:17.000000000 +0200
+@@ -81,7 +81,7 @@
+         echo '<ul>'."\n";
+         echo '<li>$pnconfig[\'dbtabletype\'] = \'MyISAM\';</li>'."\n";
+         echo '<li>$pnconfig[\'pconnect\'] = \'0\';</li>'."\n";
+-        echo '<li>$pnconfig[\'temp\'] = \'pnTemp\';</li>'."\n";
++        echo '<li>$pnconfig[\'temp\'] = \'/var/lib/postnuke/pnTemp\';</li>'."\n";
+         echo '<li>$pndebug[\'pagerendertime\'] = 0;</li>'."\n";
+         echo '</ul>'."\n";
+         echo "<a href=\"upgrade.php?username=$username&amp;password=$password&amp;task=upgrade\">Upgrade all modules.</a>\n";
