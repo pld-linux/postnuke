@@ -1,6 +1,6 @@
-unchanged:
---- PostNuke-0.762/html/includes/pnAPI.php	2006-03-10 01:13:58.000000000 +0200
-+++ PostNuke-0.762.config/html/includes/pnAPI.php	2006-03-10 01:13:38.000000000 +0200
+diff -ur PostNuke-0.762/html/includes/pnAPI.php PostNuke-0.762.config/html/includes/pnAPI.php
+--- PostNuke-0.762/html/includes/pnAPI.php	2006-03-10 01:28:05.000000000 +0200
++++ PostNuke-0.762.config/html/includes/pnAPI.php	2006-03-10 01:27:23.000000000 +0200
 @@ -176,7 +176,7 @@
      // Initialise and load configuration
      $pnconfig = array();
@@ -10,9 +10,9 @@ unchanged:
      $GLOBALS['pnconfig'] = $pnconfig;
      $GLOBALS['pndebug'] = $pndebug;
  
-diff -u PostNuke-0.762.config/html/install/check.php PostNuke-0.762.config/html/install/check.php
---- PostNuke-0.762.config/html/install/check.php	2006-03-10 01:13:38.000000000 +0200
-+++ PostNuke-0.762.config/html/install/check.php	2006-03-10 01:11:34.000000000 +0200
+diff -ur PostNuke-0.762/html/install/check.php PostNuke-0.762.config/html/install/check.php
+--- PostNuke-0.762/html/install/check.php	2006-03-10 01:28:08.000000000 +0200
++++ PostNuke-0.762.config/html/install/check.php	2006-03-10 01:27:23.000000000 +0200
 @@ -50,7 +50,7 @@
  
      echo "<font class=\"pn-title\">" . _CHMOD_CHECK_1 . "</font><br><br>
@@ -31,9 +31,9 @@ diff -u PostNuke-0.762.config/html/install/check.php PostNuke-0.762.config/html/
      // $mode = fileperms($file);
      // $mode &= 0x1ff; # Remove the bits we don't need
      // $chmod = sprintf("%o", $mode);
-diff -u PostNuke-0.762.config/html/install/modify_config.php PostNuke-0.762.config/html/install/modify_config.php
---- PostNuke-0.762.config/html/install/modify_config.php	2006-03-10 01:13:38.000000000 +0200
-+++ PostNuke-0.762.config/html/install/modify_config.php	2006-03-10 01:11:34.000000000 +0200
+diff -ur PostNuke-0.762/html/install/modify_config.php PostNuke-0.762.config/html/install/modify_config.php
+--- PostNuke-0.762/html/install/modify_config.php	2006-03-10 01:28:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/modify_config.php	2006-03-10 01:27:23.000000000 +0200
 @@ -144,7 +144,7 @@
          add_src_rep("adminmail", $email);
      }
@@ -43,8 +43,9 @@ diff -u PostNuke-0.762.config/html/install/modify_config.php PostNuke-0.762.conf
  
      if (preg_match("/Error/", $ret)) {
          show_error_info();
---- PostNuke-0.762/html/install/upgrade.php	2006-03-10 01:14:03.000000000 +0200
-+++ PostNuke-0.762.config/html/install/upgrade.php	2006-03-10 01:13:38.000000000 +0200
+diff -ur PostNuke-0.762/html/install/upgrade.php PostNuke-0.762.config/html/install/upgrade.php
+--- PostNuke-0.762/html/install/upgrade.php	2006-03-10 01:28:06.000000000 +0200
++++ PostNuke-0.762.config/html/install/upgrade.php	2006-03-10 01:27:23.000000000 +0200
 @@ -157,7 +157,7 @@
      mysql_connect($dbhost, $dbuname, $dbpass);
      mysql_select_db("$dbname") or die ("<br><font class=\"pn-failed\">Nie mo¿na wybraæ bazy danych.</font>");
@@ -54,9 +55,9 @@ diff -u PostNuke-0.762.config/html/install/modify_config.php PostNuke-0.762.conf
  } 
  
  /**
-unchanged:
---- PostNuke-0.762/html/install.php	2006-03-10 01:13:53.000000000 +0200
-+++ PostNuke-0.762.config/html/install.php	2006-03-10 01:13:38.000000000 +0200
+diff -ur PostNuke-0.762/html/install.php PostNuke-0.762.config/html/install.php
+--- PostNuke-0.762/html/install.php	2006-03-10 01:28:00.000000000 +0200
++++ PostNuke-0.762.config/html/install.php	2006-03-10 01:27:23.000000000 +0200
 @@ -100,7 +100,7 @@
  
  
@@ -66,27 +67,9 @@ unchanged:
      $prefix = $pnconfig['prefix'];
      $dbtype = $pnconfig['dbtype'];
      $dbtabletype = $pnconfig['dbtabletype'];
-@@ -125,7 +125,7 @@
- 
- $currentlang = installer_get_language(@$currentlang);
- 
--include_once 'install/modify_config.php'; // functions to modify config.php
-+include_once 'install/modify_config.php'; // functions to modify config.php
- include_once 'install/upgrade.php';  // functions for upgrades
- include_once 'install/newinstall.php'; // functions for new installs
- include_once 'install/gui.php'; // functions for rendering the gui
-@@ -174,7 +174,7 @@
- 
-     case "Set Login":
-          $inst_dbconn = dbconnect($dbhost, $dbuname, $dbpass, $dbname, $dbtype);
--         update_config_php(true); // Scott - added
-+         update_config_php(true); // Scott - added
-          input_data($dbhost, $dbuname, $dbpass, $dbname, $prefix, $dbtype, $aid, $name, $pwd, $repeatpwd, $email, $url);
-          if(start_postnuke($aid, $pwd)) {
-             set_config_vars($currentlang);
-diff -u PostNuke-0.762.config/html/modules/Admin/pnadmin.php PostNuke-0.762.config/html/modules/Admin/pnadmin.php
---- PostNuke-0.762.config/html/modules/Admin/pnadmin.php	2006-03-10 01:13:38.000000000 +0200
-+++ PostNuke-0.762.config/html/modules/Admin/pnadmin.php	2006-03-10 01:09:02.000000000 +0200
+diff -ur PostNuke-0.762/html/modules/Admin/pnadmin.php PostNuke-0.762.config/html/modules/Admin/pnadmin.php
+--- PostNuke-0.762/html/modules/Admin/pnadmin.php	2006-03-10 01:28:08.000000000 +0200
++++ PostNuke-0.762.config/html/modules/Admin/pnadmin.php	2006-03-10 01:27:23.000000000 +0200
 @@ -945,11 +945,11 @@
      $pnRender->assign('register_globals', $register_globals);
  
