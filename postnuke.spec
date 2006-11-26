@@ -20,7 +20,7 @@ Summary:	weblog/Content Management System (CMS)
 Summary(pl):	System zarz±dzania tre¶ci±
 Name:		postnuke
 Version:	0.762
-Release:	1.15
+Release:	2
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-%{version}.tar.gz
@@ -38,11 +38,12 @@ Patch1:		%{name}-config.patch
 Patch2:		%{name}-smarty.patch
 URL:		http://www.postnuke.com/
 BuildRequires:	rpmbuild(macros) >= 1.268
-Requires:	php-exif
-Requires:	php-mysql >= 3:4.0.2
-Requires:	php-tokenizer
-Requires:	webapps
 Requires:	Smarty >= 2.6.10-4
+Requires:	php(exif)
+Requires:	php(mysql)
+Requires:	php(tokenizer)
+Requires:	php-common >= 3:4.0.2
+Requires:	webapps
 Obsoletes:	postnuke-install
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -101,22 +102,19 @@ should uninstall this package when you're done, as it considered
 insecure to keep the setup files in place.
 
 %description setup -l pl
-Ten pakiet nale¿y zainstalowaæ w celu wstêpnej konfiguracji Postnuke po
-pierwszej instalacji. Potem nale¿y go odinstalowaæ, jako ¿e
+Ten pakiet nale¿y zainstalowaæ w celu wstêpnej konfiguracji Postnuke
+po pierwszej instalacji. Potem nale¿y go odinstalowaæ, jako ¿e
 pozostawienie plików instalacyjnych mog³oby byæ niebezpieczne.
 
 %prep
 %setup -q -n PostNuke-%{version} -a1 -a2
-# dosi reavahetused maha. lihtsam pätsida.
 find . -type f -print0 | xargs -0 sed -i -e 's,\r$,,'
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 
-# pole mõtet seda vana faili sinna toppida
 > html/config-old.php
 
-# roogime smarti välja
 install -d smarty
 mv html/includes/classes/Smarty/plugins/resource.{userdb,var}.php smarty
 rm -rf html/includes/classes/Smarty
