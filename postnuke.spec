@@ -17,7 +17,7 @@
 # - use system Smarty and adodb
 # - %%lang for install/lang/pol,fra,... messages?
 Summary:	weblog/Content Management System (CMS)
-Summary(pl):	System zarz±dzania tre¶ci±
+Summary(pl.UTF-8):   System zarzÄ…dzania treÅ›ciÄ…
 Name:		postnuke
 Version:	0.762
 Release:	2
@@ -72,27 +72,27 @@ Some of the highlights of PostNuke are:
 This package includes additional modules:
 - ContentExpress-%{_ceversion}
 
-%description -l pl
-PostNuke jest systemem zarz±dzania tre¶ci±. Jest du¿o bardziej
-bezpieczny i stabilny ni¿ konkurencyjne produkty i mo¿e z ³atwo¶ci±
-dzia³aæ w ¶rodowiskach z du¿ym ruchem.
+%description -l pl.UTF-8
+PostNuke jest systemem zarzÄ…dzania treÅ›ciÄ…. Jest duÅ¼o bardziej
+bezpieczny i stabilny niÅ¼ konkurencyjne produkty i moÅ¼e z Å‚atwoÅ›ciÄ…
+dziaÅ‚aÄ‡ w Å›rodowiskach z duÅ¼ym ruchem.
 
-Niektóre zalety PostNuke to:
-- konfigurowalno¶æ wszystkich aspektów wygl±du serwisu WWW poprzez
-  motywy, wraz z obs³ug± CSS
-- mo¿liwo¶æ okre¶lenia elementów jako odpowiednich dla jednego lub
-  wszystkich jêzyków
-- najlepsza gwarancja wy¶wietlania stron we wszystkich przegl±darkach
-  dziêki zgodno¶ci ze standardem HTML 4.01 transitional
-- standardowe API i obszerna dokumentacja, pozwalaj±ce na ³atwe
-  tworzenie dodatkowej funkcjonalno¶ci poprzez modu³y i bloki.
+NiektÃ³re zalety PostNuke to:
+- konfigurowalnoÅ›Ä‡ wszystkich aspektÃ³w wyglÄ…du serwisu WWW poprzez
+  motywy, wraz z obsÅ‚ugÄ… CSS
+- moÅ¼liwoÅ›Ä‡ okreÅ›lenia elementÃ³w jako odpowiednich dla jednego lub
+  wszystkich jÄ™zykÃ³w
+- najlepsza gwarancja wyÅ›wietlania stron we wszystkich przeglÄ…darkach
+  dziÄ™ki zgodnoÅ›ci ze standardem HTML 4.01 transitional
+- standardowe API i obszerna dokumentacja, pozwalajÄ…ce na Å‚atwe
+  tworzenie dodatkowej funkcjonalnoÅ›ci poprzez moduÅ‚y i bloki.
 
-Ten pakiet zawiera dodatkowe modu³y:
+Ten pakiet zawiera dodatkowe moduÅ‚y:
 - ContentExpress-%{_ceversion}
 
 %package setup
 Summary:	Postnuke setup package
-Summary(pl):	Pakiet do wstêpnej konfiguracji Postnuke
+Summary(pl.UTF-8):   Pakiet do wstÄ™pnej konfiguracji Postnuke
 Group:		Applications/WWW
 Requires:	%{name} = %{version}-%{release}
 
@@ -101,10 +101,10 @@ Install this package to configure initial Postnuke installation. You
 should uninstall this package when you're done, as it considered
 insecure to keep the setup files in place.
 
-%description setup -l pl
-Ten pakiet nale¿y zainstalowaæ w celu wstêpnej konfiguracji Postnuke
-po pierwszej instalacji. Potem nale¿y go odinstalowaæ, jako ¿e
-pozostawienie plików instalacyjnych mog³oby byæ niebezpieczne.
+%description setup -l pl.UTF-8
+Ten pakiet naleÅ¼y zainstalowaÄ‡ w celu wstÄ™pnej konfiguracji Postnuke
+po pierwszej instalacji. Potem naleÅ¼y go odinstalowaÄ‡, jako Å¼e
+pozostawienie plikÃ³w instalacyjnych mogÅ‚oby byÄ‡ niebezpieczne.
 
 %prep
 %setup -q -n PostNuke-%{version} -a1 -a2
