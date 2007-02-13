@@ -17,7 +17,7 @@
 # - use system Smarty and adodb
 # - %%lang for install/lang/pol,fra,... messages?
 Summary:	weblog/Content Management System (CMS)
-Summary(pl.UTF-8):   System zarządzania treścią
+Summary(pl.UTF-8):	System zarządzania treścią
 Name:		postnuke
 Version:	0.762
 Release:	2
@@ -92,7 +92,7 @@ Ten pakiet zawiera dodatkowe moduły:
 
 %package setup
 Summary:	Postnuke setup package
-Summary(pl.UTF-8):   Pakiet do wstępnej konfiguracji Postnuke
+Summary(pl.UTF-8):	Pakiet do wstępnej konfiguracji Postnuke
 Group:		Applications/WWW
 Requires:	%{name} = %{version}-%{release}
 
