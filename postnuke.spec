@@ -19,12 +19,12 @@
 Summary:	weblog/Content Management System (CMS)
 Summary(pl.UTF-8):	System zarządzania treścią
 Name:		postnuke
-Version:	0.762
-Release:	2
+Version:	0.764
+Release:	1
 License:	GPL v2
 Group:		Applications/WWW
-Source0:	http://downloads.postnuke.com/sf/postnuke/PostNuke-%{version}.tar.gz
-# Source0-md5:	ea25bb933c4a99b30854815215dcdbb6
+Source0:	http://noc.postnuke.com/frs/download.php/1340/PostNuke-%{version}.tar.gz
+# Source0-md5:	dd1cbfb601b855d7525f076a4f81f333
 # ContentExpress
 %define		_ceversion	1.2.7.5
 Source1:	http://dl.sourceforge.net/xexpress/ce-%{_ceversion}.tar.gz
@@ -110,7 +110,7 @@ pozostawienie plików instalacyjnych mogłoby być niebezpieczne.
 %setup -q -n PostNuke-%{version} -a1 -a2
 find . -type f -print0 | xargs -0 sed -i -e 's,\r$,,'
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 %patch2 -p1
 
 > html/config-old.php
