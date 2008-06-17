@@ -37,7 +37,7 @@ Patch0:		%{name}-pnTemp.patch
 Patch1:		%{name}-config.patch
 Patch2:		%{name}-smarty.patch
 URL:		http://www.postnuke.com/
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	Smarty >= 2.6.10-4
 Requires:	php(exif)
 Requires:	php(mysql)
@@ -52,7 +52,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_webapp		%{name}
 %define		_sysconfdir	%{_webapps}/%{_webapp}
 %define		_appdir		%{_datadir}/%{_webapp}
-%define		_smartyplugindir	/usr/share/php/Smarty/plugins
+%define		_smartyplugindir	%{php_data_dir}/Smarty/plugins
 
 %description
 PostNuke is a weblog/Content Management System (CMS). It is far more
